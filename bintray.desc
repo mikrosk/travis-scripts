@@ -1,0 +1,17 @@
+{
+    "package": {
+        "name": "freemint",
+        "repo": "travis-support",
+        "subject": "freemint"
+    },
+
+    "version": {
+        "name": "master"
+    },
+
+    "files":
+        [
+        {"includePattern": "build/travis-freemint-master.tar.bz2", "uploadPattern": "travis-freemint-master.tar.bz2", "matrixParams": {"override": 1}}
+        ],
+    "publish": true
+}

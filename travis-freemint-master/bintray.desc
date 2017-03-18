@@ -1,0 +1,19 @@
+{
+    "package": {
+        "name": "snapshots",
+        "repo": "freemint",
+        "subject": "freemint"
+    },
+
+    "version": {
+        "name": "MINT_MAJ_VERSION-MINT_MIN_VERSION-MINT_PATCH_LEVEL",
+        "desc": "Commit URL: COMMIT_URL",
+        "attributes": [{"name": "Commit", "values" : ["COMMIT_ID"], "type": "string"}]
+    },
+
+    "files": [
+        {"includePattern": "\.travis/(.*\\.zip)", "uploadPattern": "snapshots/$1", "matrixParams": {"override": 1}}
+    ],
+
+    "publish": true
+}

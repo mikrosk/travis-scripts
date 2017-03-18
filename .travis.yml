@@ -1,0 +1,15 @@
+os: linux
+
+# don't install anything
+install: true
+
+script:
+  - mkdir build && mv travis-freemint-master build/.travis && cd build && tar cjf travis-freemint-master.tar.bz2 .travis && cd ..
+
+deploy:
+  provider: bintray
+  file: bintray.desc
+  user: mikrosk
+  key:
+    secure: RxBOcwjyIoZZ6uq+EiUyrzFySsFEHrbAz5Z+TmBXuF9pcAHsHSyVF83oF4d8t1Oaj1+22Gi+Y3WfG4SgcAPvNABTD7DRmEu4sX3Cb6CpFukxMF45Q7MR7z2aAdSkdilwyjAaTqQdvl+3Kl9+mOCa9JyRb3QB+rBG2HOQJvjvdZYjybTL+noV4uWeYGqdme5SM/QTwPj6fxeNqzMs2pW6ASUhfCoEWtZf3E4voTFzpw9y7MEq91vkHXa2hStcjt4IbigjHVgJThFg6w6VP7dR7W2BJvy/t3MdKONAfCL65lj/+Gu18YVvh0HBegkC8DHGJN81H02zTuKX47oQr/Uyu/V683pzqeWH5AmZyMp5Jz/VIJ6CuAWTxQZA9B2n82kQub507pcB/FWszTFr4Jna1m3G2d80hHpMY6IjZX8QA7mo9vweqYnOiGOw/aTDPAcWwqZvznlcpIpwsrVeHwrKdEn3bKDV46r9/oNVAyP2a/Y7h3DyKq+tajW9k/6q3hJ/jGad2Gi8aleJrNahO3HEQ2ZpX9OegsVsGJlZVgNu+zSXOxxdIYMiopNPxXmFc3oFgX580Vd/fzO9xx0mouxb+1GMfUmHvyTHYTpxgd3hdoQHk9nI2opOHQq8FI5QPXkgJwY7bUhxVKuMSwP7wj2ZbdGC0a28F54ERWjt6yr+hDg=
+  on: freemint-master
