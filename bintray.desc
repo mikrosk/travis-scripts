@@ -1,0 +1,17 @@
+{
+    "package": {
+        "name": "freemint",
+        "repo": "travis-support",
+        "subject": "freemint"
+    },
+
+    "version": {
+        "name": "helmut"
+    },
+
+    "files":
+        [
+        {"includePattern": "build/travis-freemint-helmut.tar.bz2", "uploadPattern": "travis-freemint-helmut-raw.tar.bz2", "matrixParams": {"override": 1}}
+        ],
+    "publish": true
+}
