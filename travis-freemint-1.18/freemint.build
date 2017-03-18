@@ -1,0 +1,22 @@
+#!/bin/sh
+#TODAY=`date +%d%m%Y`
+
+# trunk
+# git clone https://github.com/freemint/freemint.git 
+# if [ $? != 0 ]; then
+# 	tail -20 /tmp/compile.out | sed -e 's+/data/code/Atari/++g' | mail -s "FreeMiNT build broken (trunk)" freemint-list@mail.atariforge.org
+# 	exit 1
+# fi
+# cd freemint
+# make CROSS=yes distclean
+# make CROSS=yes > /tmp/compile.out 2>&1
+make CROSS=yes
+# if [ $? != 0 ]; then
+# 	tail -20 /tmp/compile.out | sed -e 's+/data/code/Atari/++g' | mail -s "FreeMiNT build broken (trunk)" freemint-list@mail.atariforge.org
+# else
+	rm -rf /tmp/freemint/
+	DEST=/tmp/freemint MINTVER=1-18-CUR ./.travis/freemint.copy
+	tar -C /tmp/freemint/ -cjf /tmp/freemint-1.18-$TODAY.tar.bz2 .
+	# Now upload
+	cp /tmp/freemint-1.18-$TODAY.tar.bz2 "$1"
+# fi
