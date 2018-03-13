@@ -7,9 +7,11 @@ script:
   - mkdir build && mv travis-freemint-helmut build/.travis && cd build && tar cjf travis-freemint-helmut.tar.bz2 .travis && cd ..
 
 deploy:
+  edge:
+    branch: v1.8.47
   provider: bintray
   file: bintray.desc
   user: mikrosk
   key:
-    secure: RxBOcwjyIoZZ6uq+EiUyrzFySsFEHrbAz5Z+TmBXuF9pcAHsHSyVF83oF4d8t1Oaj1+22Gi+Y3WfG4SgcAPvNABTD7DRmEu4sX3Cb6CpFukxMF45Q7MR7z2aAdSkdilwyjAaTqQdvl+3Kl9+mOCa9JyRb3QB+rBG2HOQJvjvdZYjybTL+noV4uWeYGqdme5SM/QTwPj6fxeNqzMs2pW6ASUhfCoEWtZf3E4voTFzpw9y7MEq91vkHXa2hStcjt4IbigjHVgJThFg6w6VP7dR7W2BJvy/t3MdKONAfCL65lj/+Gu18YVvh0HBegkC8DHGJN81H02zTuKX47oQr/Uyu/V683pzqeWH5AmZyMp5Jz/VIJ6CuAWTxQZA9B2n82kQub507pcB/FWszTFr4Jna1m3G2d80hHpMY6IjZX8QA7mo9vweqYnOiGOw/aTDPAcWwqZvznlcpIpwsrVeHwrKdEn3bKDV46r9/oNVAyP2a/Y7h3DyKq+tajW9k/6q3hJ/jGad2Gi8aleJrNahO3HEQ2ZpX9OegsVsGJlZVgNu+zSXOxxdIYMiopNPxXmFc3oFgX580Vd/fzO9xx0mouxb+1GMfUmHvyTHYTpxgd3hdoQHk9nI2opOHQq8FI5QPXkgJwY7bUhxVKuMSwP7wj2ZbdGC0a28F54ERWjt6yr+hDg=
+    secure: IC2hKKh7WfWFWj75pyihwCudU02Yk28lJ5jWCL0zynkoAGg8pDwy9k+ZpIMuG95JzEJJKi3U7pscgsxPHYwq11228T9epkQpqxU3zhqne1IDZt4+z4BJ/idW6b3Z/afFLxLXjG/dzUhYy6tTM1G82FJZUBlC8XPJsbIy7DRAij2AajV+8aFUAb7VsHtiZ6tg39G3QBHvCD4ki/LaY1n5lwnu4dLUSxWb6lyW2IRtFtoNntelBSPlfcpYP8i6Og+Rxh2lYZAAZRgkXWpwRgDINc5oQcaKg1ntgYC3bgusKDYxdZ07rX4WWCwqdvlUwTQuGJ+Hq8fEZPmFXityUfW+O+Z8fxBzDp8q/8z+Tq+S+E+VDYqYCrm97i9gWN+xeocADfKej+dQHVBzrWoiadQ7FHu3aICmpnbRQNWAXf7ehS0LgavjyhNlAvXCU2jZFthmDmDd0JiVHKhvjccxp7kqrml7+mFlTBZIATM4bXvF4aOVmfOyLv6hM+O9WNRGSprPr7FmjZlz9FVG53fUHum1T43qfnfQxlXzfGeK3bZWWxsNwILU+RJKkl7JimOWLbqKhsnAoe5kldT3L9Q2nCyS8HJdDbchhyvE5XZdro3BNgW4rni6izDR8UWWRcEl+ClVqiALzLuYq0Dbj0SKFdJgk534r7lPqoriyTEOY6K1sOw=
   on: freemint-helmut-raw
