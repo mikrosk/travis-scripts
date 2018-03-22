@@ -205,6 +205,10 @@ copy_ct60_modules() {
 
 	cp -r "$1/falcon"/* "$MCHDIR"
 
+	# we don't need plain st/falcon version
+	rm "$MCHDIR/rtl8012.xix"
+	cp "$SRC/sys/sockets/xif/rtl8012ct60.xif" "$MCHDIR/rtl8012ct60.xix"
+
 	cp "$SRC/sys/sockets/xif/ethernat/ethernat.xif" "$MCHDIR/ethernat.xix"
 	cp "$SRC/sys/sockets/xif/ethernat/README" "$MCHDIR/doc/ethernat.txt"
 	cp "$SRC/sys/sockets/xif/svethlana/svethlan.xif" "$MCHDIR/svethlan.xix"
