@@ -229,6 +229,8 @@ copy_aranym_modules() {
 	cp "$SRC/sys/sockets/xif/nfeth/README" "$MCHDIR/doc/nfeth.txt"
 	cp "$SRC/sys/xdd/nfstderr/nfstderr.xdd" "$MCHDIR"
 	cp "$SRC/sys/xdd/nfstderr/README" "$MCHDIR/doc/nfstderr.txt"
+	cp "$SRC/sys/xdd/nfexec/nfexec.xdd" "$MCHDIR"
+	cp "$SRC/sys/xdd/nfexec/README" "$MCHDIR/doc/nfexec.txt"
 	cp "$SRC/sys/xfs/aranym/aranym.xfs" "$MCHDIR"
 	cp "$SRC/sys/xfs/aranym/README" "$MCHDIR/doc/aranym.txt"
 	# not really needed
