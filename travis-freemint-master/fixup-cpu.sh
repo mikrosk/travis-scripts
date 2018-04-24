@@ -6,6 +6,7 @@ CPU="$1"
 SRC="$2"
 DST="$3"
 VER="$4"
+CUR="$5"
 
 PWD="$(dirname "$0")"
 . "$PWD/util.sh"

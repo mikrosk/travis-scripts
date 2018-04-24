@@ -3,6 +3,7 @@
 SRC="$1"
 DST="$2"
 VER="$3"
+CUR="$4"
 
 PWD="$(dirname "$0")"
 . "$PWD/util.sh"

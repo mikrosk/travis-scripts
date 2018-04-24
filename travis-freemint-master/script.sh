@@ -21,12 +21,12 @@ cd "${PROJECT}-020/tools" && make CPU=020-60 && cd ../sys/usb/src.km/loader && m
 cd "${PROJECT}-col/tools" && make CPU=v4e && cd ../sys/usb/src.km/loader && make CPU=v4e && cd ../../../../xaaes/src.km/xaloader && make CPU=v4e && cd ../../../..
 
 mkdir -p "${TMP}"
-"./${PROJECT}/.travis/prepare-snapshot.sh"     "${PROJECT}"     "${TMP}/mint-${SHORT_ID}"  "${VERSION}"
-"./${PROJECT}/.travis/fixup-cpu.sh"      "020" "${PROJECT}-020" "${TMP}/mint-${SHORT_ID}"  "${VERSION}"
-"./${PROJECT}/.travis/fixup-cpu.sh"      "col" "${PROJECT}-col" "${TMP}/mint-${SHORT_ID}"  "${VERSION}"
+"./${PROJECT}/.travis/prepare-snapshot.sh"     "${PROJECT}"     "${TMP}/mint-${SHORT_ID}"  "${VERSION}" "${SHORT_ID}"
+"./${PROJECT}/.travis/fixup-cpu.sh"      "020" "${PROJECT}-020" "${TMP}/mint-${SHORT_ID}"  "${VERSION}" "${SHORT_ID}"
+"./${PROJECT}/.travis/fixup-cpu.sh"      "col" "${PROJECT}-col" "${TMP}/mint-${SHORT_ID}"  "${VERSION}" "${SHORT_ID}"
 
-"./${PROJECT}/.travis/prepare-aranym.sh"       "${PROJECT}"     "${TMP}/aranym-${VERSION}" "${VERSION}" "${ARANYM}"
-"./${PROJECT}/.travis/fixup-aranym.sh"         "${PROJECT}-020" "${TMP}/aranym-${VERSION}" "${VERSION}" "${ARANYM}"
+"./${PROJECT}/.travis/prepare-aranym.sh"       "${PROJECT}"     "${TMP}/aranym-${VERSION}" "${VERSION}" "${SHORT_ID}" "${ARANYM}"
+"./${PROJECT}/.travis/fixup-aranym.sh"         "${PROJECT}-020" "${TMP}/aranym-${VERSION}" "${VERSION}" "${SHORT_ID}" "${ARANYM}"
 
 find "${TMP}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
 
