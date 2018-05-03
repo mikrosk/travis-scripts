@@ -300,6 +300,7 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
+	cp "$SRC/tools/usb/usb.acc" "$USB4TOSDIR"
 }
 
 copy_fonts() {
