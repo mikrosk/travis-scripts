@@ -387,9 +387,6 @@ copy_sysroot() {
 	cp "$SRC/tools/toswin2/README.terminfo" "$SYSROOT/GEM/toswin2"
 	cp "$SRC/tools/toswin2/vttest.txt" "$SYSROOT/GEM/toswin2"
 	
-	mkdir -p "$SYSROOT/GEM/usb"
-	cp "$SRC/tools/usb/usb.acc" "$SYSROOT/GEM/usb"
-
 	mkdir -p "$SYSROOT/bin"
 	cp "$SRC/tools/crypto/crypto" "$SYSROOT/bin/crypto.ttp"
 	cp "$SRC/tools/fdisk/fdisk" "$SYSROOT/bin/fdisk.ttp"
