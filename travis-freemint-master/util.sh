@@ -337,11 +337,10 @@ copy_sysroot() {
 	mkdir -p "$SYSROOT/GEM/fsetter/de"
 	cp "$SRC/tools/fsetter/fsetter.rsc" "$SYSROOT/GEM/fsetter/de/fsetter.rsc"
 	
-	# TODO: needs proper gemma installation
-	#mkdir -p "$SYSROOT/GEM/gemkfat"
-	#cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/GEM/gemkfat"
-	#cp "$SRC/tools/mkfatfs/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfat.app"
-	#cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/GEM/gemkfat/gemkfat.rsc"
+	mkdir -p "$SYSROOT/GEM/gemkfat"
+	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/GEM/gemkfat"
+	cp "$SRC/tools/mkfatfs/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfat.app"
+	cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/GEM/gemkfat/gemkfat.rsc"
 	
 	mkdir -p "$SYSROOT/GEM/gluestik"
 	cp "$SRC/tools/gluestik/gluestik.prg" "$SYSROOT/GEM/gluestik"
