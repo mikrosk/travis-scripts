@@ -250,7 +250,7 @@ copy_xaaes() {
 	if [ "$TARGET" = "col" ]
 	then
         KM_TARGET="v4e"
-    else
+	else
         KM_TARGET="$TARGET"
 	fi
 	mkdir -p "$XAAESDIR"
@@ -285,7 +285,10 @@ copy_usb() {
 	mkdir -p "$USBDIR"
 	cp "$SRC/sys/usb/src.km/.compile_$TARGET"/*.km "$USBDIR/usb.km"
 	cp "$SRC/sys/usb/src.km/ucd/ehci/.compile_$TARGET/ehci.ucd" "$USBDIR"
+	if [ "$TARGET" != "col" ]
+	then
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_$TARGET/netusbee.ucd" "$USBDIR"
+	fi
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_$TARGET/unicorn.ucd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_$TARGET/eth.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_$TARGET/mouse.udd" "$USBDIR"
@@ -300,7 +303,7 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
-	cp "$SRC/tools/usb/usb.acc" "$USB4TOSDIR"
+	cp "$SRC/tools/usb/usbtool.acc" "$USB4TOSDIR"
 }
 
 copy_fonts() {
