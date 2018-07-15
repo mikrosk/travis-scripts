@@ -339,8 +339,8 @@ copy_sysroot() {
 	
 	mkdir -p "$SYSROOT/GEM/gemkfat"
 	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/GEM/gemkfat"
-	cp "$SRC/tools/mkfatfs/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfat.app"
-	cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/GEM/gemkfat/gemkfat.rsc"
+	cp "$SRC/tools/mkfatfs/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfatfs.app"
+	cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/GEM/gemkfat/gemkfatfs.rsc"
 	
 	mkdir -p "$SYSROOT/GEM/gluestik"
 	cp "$SRC/tools/gluestik/gluestik.prg" "$SYSROOT/GEM/gluestik"
