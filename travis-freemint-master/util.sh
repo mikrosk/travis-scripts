@@ -300,6 +300,7 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/.compile_prg/usb.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_prg/unicorn.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg/netusbee.prg" "$USB4TOSDIR"
+	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg_000/netusbee.prg" "$USB4TOSDIR/netus000.prg"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
