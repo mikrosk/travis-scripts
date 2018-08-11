@@ -49,18 +49,21 @@ copy_modules "$MINTDIR_020" "02060"
 copy_modules "$MINTDIR_V4E" "col"
 
 # mchdir: st, ste, megaste, tt, falcon, milan, hades, ct60, firebee, aranym
+copy_m68k_modules "$MINTDIR_000"
 copy_st_modules "$MINTDIR_000"
 # TODO: this one is not detected by FreeMiNT !!!
 copy_megast_modules "$MINTDIR_000"
 copy_ste_modules "$MINTDIR_000"
 copy_megaste_modules "$MINTDIR_000"
+
+copy_m68k_modules "$MINTDIR_020"
 copy_tt_modules "$MINTDIR_020"
 copy_falcon_modules "$MINTDIR_020"
 copy_milan_modules "$MINTDIR_020"
 copy_hades_modules "$MINTDIR_020"
 copy_ct60_modules "$MINTDIR_020"
+
 copy_firebee_modules "$MINTDIR_V4E"
-copy_aranym_modules "$MINTDIR_020"
 
 copy_xaloader "$XAAESDIR_000"
 # TODO: 020, V4E (done as a separate step)
