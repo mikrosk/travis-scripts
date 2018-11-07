@@ -1,16 +1,22 @@
+#!/bin/bash -eux
+# -e: Exit immediately if a command exits with a non-zero status.
+# -u: Treat unset variables as an error when substituting.
+# -x: Display expanded script commands
+
 copy_auto() {
 	AUTODIR="$1"
+	TARGET="$2"
 	mkdir -p "$AUTODIR"
-	cp "$SRC/tools/mintload/mintload.prg" "$AUTODIR/mint-$CUR.prg"
+	cp "$SRC/tools/mintload/.compile_$TARGET/mintload.prg" "$AUTODIR/mint-$CUR.prg"
 }
 
 copy_kernel() {
 	MINTDIR="$1"
 	mkdir -p "$MINTDIR"
 	shift
-	for target in $*
+	for TARGET in $*
 	do
-		cp "$SRC/sys/.compile_$target"/mint*.prg "$MINTDIR"
+		cp "$SRC/sys/.compile_$TARGET"/mint*.prg "$MINTDIR"
 	done
 	cp "$SRC/doc/examples/mint.cnf" "$MINTDIR"/mint.cnf
 	sed -e "s/#GEM=u:\/c\/mint\/xaaes\/xaloader.prg/GEM=u:\/c\/mint\/$VER\/xaaes\/xaloader.prg/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
@@ -77,7 +83,7 @@ copy_st_modules() {
 	cp "$SRC/sys/sockets/xif/DIAL.txt" "$MCHDIR/doc/dial.txt"
 	cp "$SRC/sys/sockets/xif/pamsdma.xif" "$MCHDIR/pamsdma.xix"
 	cp "$SRC/sys/sockets/xif/PAMs_DMA.txt" "$MCHDIR/doc/pamsdma.txt"
-	
+
 	cp "$SRC/sys/sockets/xif/rtl8012st.xif" "$MCHDIR/rtl8012st.xix"
 	cp "$SRC/sys/xdd/mfp/mfp.xdd" "$MCHDIR"
 	mkdir -p "$MCHDIR/doc/mfp"
@@ -238,8 +244,9 @@ copy_aranym_modules() {
 
 copy_xaloader() {
 	XAAESDIR="$1"
+	TARGET="$2"
 	mkdir -p "$XAAESDIR"
-	cp "$SRC/xaaes/src.km/xaloader/xaloader.prg" "$XAAESDIR"
+	cp "$SRC/xaaes/src.km/xaloader/.compile_$TARGET/xaloader.prg" "$XAAESDIR"
 }
 
 copy_xaaes() {
@@ -273,8 +280,9 @@ copy_xaaes() {
 
 copy_usbloader() {
 	USBDIR="$1"
+	TARGET="$2"
 	mkdir -p "$USBDIR"
-	cp "$SRC/sys/usb/src.km/loader/loader.prg" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/loader/.compile_$TARGET/loader.prg" "$USBDIR"
 }
 
 copy_usb() {
@@ -302,7 +310,8 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
-	cp "$SRC/tools/usbtool/usbtool.acc" "$USB4TOSDIR"
+	# TODO: multiple CPU variants?
+	cp "$SRC/tools/usbtool/.compile_000/usbtool.acc" "$USB4TOSDIR"
 }
 
 copy_fonts() {
@@ -319,15 +328,16 @@ copy_tbl() {
 
 copy_sysroot() {
 	SYSROOT="$1"
+	TARGET="$2"
 	mkdir -p "$SYSROOT/GEM"
-	
+
 	mkdir -p "$SYSROOT/GEM/cops"
-	cp "$SRC/tools/cops/cops.app" "$SYSROOT/GEM/cops"
-	cp "$SRC/tools/cops/cops_de.app" "$SYSROOT/GEM/cops"
-	cp "$SRC/tools/cops/cops_fr.app" "$SYSROOT/GEM/cops"
-	
+	cp "$SRC/tools/cops/.compile_english_$TARGET/cops.app" "$SYSROOT/GEM/cops"
+	cp "$SRC/tools/cops/.compile_german_$TARGET/cops_de.app" "$SYSROOT/GEM/cops"
+	cp "$SRC/tools/cops/.compile_france_$TARGET/cops_fr.app" "$SYSROOT/GEM/cops"
+
 	mkdir -p "$SYSROOT/GEM/fsetter"
-	cp "$SRC/tools/fsetter/fsetter.app" "$SYSROOT/GEM/fsetter"
+	cp "$SRC/tools/fsetter/.compile_$TARGET/fsetter.app" "$SYSROOT/GEM/fsetter"
 	cp "$SRC/tools/fsetter/COPYING" "$SYSROOT/GEM/fsetter"
 	cp "$SRC/tools/fsetter/liesmich" "$SYSROOT/GEM/fsetter"
 	cp "$SRC/tools/fsetter/readme" "$SYSROOT/GEM/fsetter"
@@ -335,20 +345,20 @@ copy_sysroot() {
 	cp "$SRC/tools/fsetter/fsetter_e.rsc" "$SYSROOT/GEM/fsetter/fsetter.rsc"
 	mkdir -p "$SYSROOT/GEM/fsetter/de"
 	cp "$SRC/tools/fsetter/fsetter.rsc" "$SYSROOT/GEM/fsetter/de/fsetter.rsc"
-	
+
 	mkdir -p "$SYSROOT/GEM/gemkfat"
 	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/GEM/gemkfat"
-	cp "$SRC/tools/mkfatfs/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfatfs.app"
+	cp "$SRC/tools/mkfatfs/.compile_$TARGET/gemkfatfs.app" "$SYSROOT/GEM/gemkfat/gemkfatfs.app"
 	cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/GEM/gemkfat/gemkfatfs.rsc"
-	
+
 	mkdir -p "$SYSROOT/GEM/gluestik"
-	cp "$SRC/tools/gluestik/gluestik.prg" "$SYSROOT/GEM/gluestik"
+	cp "$SRC/tools/gluestik/.compile_$TARGET/gluestik.prg" "$SYSROOT/GEM/gluestik"
 	cp "$SRC/tools/gluestik/COPYING" "$SYSROOT/GEM/gluestik"
 	cp "$SRC/tools/gluestik/LIESMICH" "$SYSROOT/GEM/gluestik"
 	cp "$SRC/tools/gluestik/README" "$SYSROOT/GEM/gluestik"
-	
+
 	mkdir -p "$SYSROOT/GEM/hyp_view"
-	cp "$SRC/tools/hypview/hyp_view.app" "$SYSROOT/GEM/hyp_view"
+	cp "$SRC/tools/hypview/.compile_$TARGET/hyp_view.app" "$SYSROOT/GEM/hyp_view"
 	cp -r "$SRC/tools/hypview/doc" "$SYSROOT/GEM/hyp_view"
 	mkdir -p "$SYSROOT/GEM/hyp_view/de"
 	cp -r "$SRC/tools/hypview/hyp_view/de.rsc" "$SYSROOT/GEM/hyp_view/de/hyp_view.rsc"
@@ -358,22 +368,22 @@ copy_sysroot() {
 	cp -r "$SRC/tools/hypview/skins" "$SYSROOT/GEM/hyp_view"
 	cp "$SRC/tools/hypview/hyp_view.bgh" "$SYSROOT/GEM/hyp_view"
 	cp "$SRC/tools/hypview/hyp_view/en.rsc" "$SYSROOT/GEM/hyp_view/hyp_view.rsc"
-	
+
 	mkdir -p "$SYSROOT/GEM/mgw"
-	cp "$SRC/tools/mgw/mgw.prg" "$SYSROOT/GEM/mgw"
+	cp "$SRC/tools/mgw/.compile_$TARGET/mgw.prg" "$SYSROOT/GEM/mgw"
 	cp -r "$SRC/tools/mgw/examples" "$SYSROOT/GEM/mgw"
 	cp "$SRC/tools/mgw/COPYING" "$SYSROOT/GEM/mgw"
 	cp "$SRC/tools/mgw/LIESMICH" "$SYSROOT/GEM/mgw"
 	cp "$SRC/tools/mgw/README" "$SYSROOT/GEM/mgw"
-	
+
 	mkdir -p "$SYSROOT/GEM/nohog2"
-	cp "$SRC/tools/nohog2/nohog2.acc" "$SYSROOT/GEM/nohog2"
+	cp "$SRC/tools/nohog2/.compile_$TARGET/nohog2.acc" "$SYSROOT/GEM/nohog2"
 	cp "$SRC/tools/nohog2/COPYING" "$SYSROOT/GEM/nohog2"
 	cp "$SRC/tools/nohog2/README" "$SYSROOT/GEM/nohog2"
-	
+
 	mkdir -p "$SYSROOT/GEM/toswin2"
-	cp "$SRC/tools/toswin2/toswin2.app" "$SYSROOT/GEM/toswin2"
-	cp "$SRC/tools/toswin2/tw-call/tw-call.app" "$SYSROOT/GEM/toswin2"
+	cp "$SRC/tools/toswin2/.compile_$TARGET/toswin2.app" "$SYSROOT/GEM/toswin2"
+	cp "$SRC/tools/toswin2/tw-call/.compile_$TARGET/tw-call.app" "$SYSROOT/GEM/toswin2"
 	# TODO: 'doc' need to be compiled as a HYP
 	cp -r "$SRC/tools/toswin2/doc" "$SYSROOT/GEM/toswin2"
 	cp "$SRC/tools/toswin2/english/toswin2.rsc" "$SYSROOT/GEM/toswin2"
@@ -387,55 +397,55 @@ copy_sysroot() {
 	cp "$SRC/tools/toswin2/twterm.src" "$SYSROOT/GEM/toswin2"
 	cp "$SRC/tools/toswin2/README.terminfo" "$SYSROOT/GEM/toswin2"
 	cp "$SRC/tools/toswin2/vttest.txt" "$SYSROOT/GEM/toswin2"
-	
+
 	mkdir -p "$SYSROOT/bin"
-	cp "$SRC/tools/crypto/crypto" "$SYSROOT/bin/crypto.ttp"
-	cp "$SRC/tools/fdisk/fdisk" "$SYSROOT/bin/fdisk.ttp"
-	cp "$SRC/tools/fdisk/sfdisk" "$SYSROOT/bin/sfdisk.ttp"
-	cp "$SRC/tools/lpflush/lpflush" "$SYSROOT/bin/lpflush.ttp"
-	cp "$SRC/tools/minix/fsck/fsck.minix" "$SYSROOT/bin/mfsck.ttp"
-	cp "$SRC/tools/minix/minit/minit" "$SYSROOT/bin/minit.ttp"
-	cp "$SRC/tools/minix/tools/flist" "$SYSROOT/bin/mflist.ttp"
-	cp "$SRC/tools/minix/tools/mfsconf" "$SYSROOT/bin/mfsconf.ttp"
-	cp "$SRC/tools/mkfatfs/mkfatfs" "$SYSROOT/bin/mkfatfs.ttp"
-	cp "$SRC/tools/mktbl/mktbl" "$SYSROOT/bin/mktbl.ttp"
-	cp "$SRC/tools/net-tools/arp" "$SYSROOT/bin/arp.ttp"
-	cp "$SRC/tools/net-tools/diald" "$SYSROOT/bin/diald.ttp"
-	cp "$SRC/tools/net-tools/ifconfig" "$SYSROOT/bin/ifconfig.ttp"
-	cp "$SRC/tools/net-tools/iflink" "$SYSROOT/bin/iflink.ttp"
-	cp "$SRC/tools/net-tools/ifstats" "$SYSROOT/bin/ifstats.ttp"
-	cp "$SRC/tools/net-tools/masqconf" "$SYSROOT/bin/masqconf.ttp"
-	cp "$SRC/tools/net-tools/netstat" "$SYSROOT/bin/netstat.ttp"
-	cp "$SRC/tools/net-tools/pppconf" "$SYSROOT/bin/pppconf.ttp"
-	cp "$SRC/tools/net-tools/route" "$SYSROOT/bin/route.ttp"
-	cp "$SRC/tools/net-tools/slattach" "$SYSROOT/bin/slattach.ttp"
-	cp "$SRC/tools/net-tools/slinkctl/slinkctl" "$SYSROOT/bin/slinkctl.ttp"
-	cp "$SRC/tools/nfs/mount_nfs" "$SYSROOT/bin/nfsmount.ttp"
-	cp "$SRC/tools/strace/strace" "$SYSROOT/bin/strace.ttp"
-	cp "$SRC/tools/swkbdtbl/swkbdtbl" "$SYSROOT/bin/swkbdtbl.ttp"
-	cp "$SRC/tools/sysctl/sysctl" "$SYSROOT/bin/sysctl.ttp"
-	
+	cp "$SRC/tools/crypto/.compile_$TARGET/crypto" "$SYSROOT/bin/crypto.ttp"
+	cp "$SRC/tools/fdisk/.compile_$TARGET/fdisk" "$SYSROOT/bin/fdisk.ttp"
+	cp "$SRC/tools/fdisk/.compile_$TARGET/sfdisk" "$SYSROOT/bin/sfdisk.ttp"
+	cp "$SRC/tools/lpflush/.compile_$TARGET/lpflush" "$SYSROOT/bin/lpflush.ttp"
+	cp "$SRC/tools/minix/fsck/.compile_$TARGET/fsck.minix" "$SYSROOT/bin/mfsck.ttp"
+	cp "$SRC/tools/minix/minit/.compile_$TARGET/minit" "$SYSROOT/bin/minit.ttp"
+	cp "$SRC/tools/minix/tools/.compile_$TARGET/flist" "$SYSROOT/bin/mflist.ttp"
+	cp "$SRC/tools/minix/tools/.compile_$TARGET/mfsconf" "$SYSROOT/bin/mfsconf.ttp"
+	cp "$SRC/tools/mkfatfs/.compile_$TARGET/mkfatfs" "$SYSROOT/bin/mkfatfs.ttp"
+	cp "$SRC/tools/mktbl/.compile_$TARGET/mktbl" "$SYSROOT/bin/mktbl.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/arp" "$SYSROOT/bin/arp.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/diald" "$SYSROOT/bin/diald.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/ifconfig" "$SYSROOT/bin/ifconfig.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/iflink" "$SYSROOT/bin/iflink.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/ifstats" "$SYSROOT/bin/ifstats.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/masqconf" "$SYSROOT/bin/masqconf.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/netstat" "$SYSROOT/bin/netstat.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/pppconf" "$SYSROOT/bin/pppconf.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/route" "$SYSROOT/bin/route.ttp"
+	cp "$SRC/tools/net-tools/.compile_$TARGET/slattach" "$SYSROOT/bin/slattach.ttp"
+	cp "$SRC/tools/net-tools/slinkctl/.compile_$TARGET/slinkctl" "$SYSROOT/bin/slinkctl.ttp"
+	cp "$SRC/tools/nfs/.compile_$TARGET/mount_nfs" "$SYSROOT/bin/nfsmount.ttp"
+	cp "$SRC/tools/strace/.compile_$TARGET/strace" "$SYSROOT/bin/strace.ttp"
+	cp "$SRC/tools/swkbdtbl/.compile_$TARGET/swkbdtbl" "$SYSROOT/bin/swkbdtbl.ttp"
+	cp "$SRC/tools/sysctl/.compile_$TARGET/sysctl" "$SYSROOT/bin/sysctl.ttp"
+
 	mkdir -p "$SYSROOT/share/man/man8"
 	cp "$SRC/tools/fdisk/sfdisk.8" "$SYSROOT/share/man/man8/sfdisk"
 	mkdir -p "$SYSROOT/share/doc/sfdisk"
 	cp "$SRC/tools/fdisk/sfdisk.examples" "$SYSROOT/share/doc/sfdisk"
-	
+
 	mkdir -p "$SYSROOT/share/man/man1"
 	cp "$SRC/tools/lpflush/lpflush.1" "$SYSROOT/share/man/man1/lpflush"
 	mkdir -p "$SYSROOT/share/doc/lpflush"
 	cp "$SRC/tools/lpflush/COPYING" "$SYSROOT/share/doc/lpflush"
-	
+
 	mkdir -p "$SYSROOT/share/doc/minix-tools"
 	cp "$SRC/tools/minix/COPYING" "$SYSROOT/share/doc/minix-tools"
 	cp "$SRC/tools/minix/docs"/*.doc "$SYSROOT/share/doc/minix-tools"
-	
+
 	mkdir -p "$SYSROOT/share/doc/mkfatfs"
 	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/share/doc/mkfatfs"
 	cp "$SRC/tools/mkfatfs/README" "$SYSROOT/share/doc/mkfatfs"
-	
+
 	mkdir -p "$SYSROOT/share/doc/mktbl"
 	cp "$SRC/tools/mktbl/COPYING" "$SYSROOT/share/doc/mktbl"
-	
+
 	mkdir -p "$SYSROOT/share/man/man8"
 	cp "$SRC/tools/net-tools/ifconfig.8" "$SYSROOT/share/man/man8/ifconfig"
 	cp "$SRC/tools/net-tools/netstat.8" "$SYSROOT/share/man/man8/netstat"
@@ -443,7 +453,7 @@ copy_sysroot() {
 	mkdir -p "$SYSROOT/share/doc/net-tools"
 	cp "$SRC/tools/net-tools/slinkctl/README" "$SYSROOT/share/doc/net-tools/slinkctl.txt"
 	cp "$SRC/tools/net-tools/COPYING" "$SYSROOT/share/doc/net-tools"
-	
+
 	mkdir -p "$SYSROOT/share/man/man5"
 	cp "$SRC/tools/nfs/mtab.5" "$SYSROOT/share/man/man5/mtab"
 	mkdir -p "$SYSROOT/share/man/man8"

@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash -eux
+# -e: Exit immediately if a command exits with a non-zero status.
+# -u: Treat unset variables as an error when substituting.
+# -x: Display expanded script commands
 
 SRC="$1"
 DST="$2"
@@ -21,10 +24,10 @@ copy_kernel "$MINTDIR_020" "ara"
 copy_modules "$MINTDIR_020" "02060"
 copy_aranym_modules "$MINTDIR_020"
 
-# TODO: copy_xaloader "$XAAESDIR_020" (done as a separate step)
+copy_xaloader "$XAAESDIR_020" "02060"
 copy_xaaes "$XAAESDIR_020" "02060"
 
-# TODO: copy_usbloader "$USBDIR_020" (done as a separate step)
+copy_usbloader "$USBDIR_020" "02060"
 copy_usb "$USBDIR_020" "02060"
 # unfortunately the usb loader isn't aware of SYSDIR or MCHDIR
 cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR_020"
@@ -32,7 +35,7 @@ cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR_020"
 copy_fonts "$FONTSDIR_020"
 copy_tbl "$TBLDIR_020"
 
-# TODO: copy_sysroot "$SYSROOT_020" (done as a separate step)
+copy_sysroot "$SYSROOT_020" "02060"
 mkdir -p "$SYSROOT_020/bin"
 cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT_020/bin/actrl.ttp"
 

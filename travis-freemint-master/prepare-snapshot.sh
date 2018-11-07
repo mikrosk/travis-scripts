@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash -eux
+# -e: Exit immediately if a command exits with a non-zero status.
+# -u: Treat unset variables as an error when substituting.
+# -x: Display expanded script commands
 
 SRC="$1"
 DST="$2"
@@ -36,8 +39,9 @@ FONTSDIR_V4E="$MINTDIR_V4E/fonts"
 # 68000 only (*.prg)
 USB4TOSDIR="$DST/usb4tos"
 
-copy_auto "$AUTODIR_000"
-# TODO: 020, V4E (done as a separate step)
+copy_auto "$AUTODIR_000" "000"
+copy_auto "$AUTODIR_020" "02060"
+copy_auto "$AUTODIR_V4E" "col"
 
 # TODO: mintloader doesn't detect Hatari (but it could via trap #1 handler pointing to the cartridge area)
 copy_kernel "$MINTDIR_000" "000" "hat"
@@ -65,15 +69,17 @@ copy_ct60_modules "$MINTDIR_020"
 
 copy_firebee_modules "$MINTDIR_V4E"
 
-copy_xaloader "$XAAESDIR_000"
-# TODO: 020, V4E (done as a separate step)
+copy_xaloader "$XAAESDIR_000" "000"
+copy_xaloader "$XAAESDIR_020" "02060"
+copy_xaloader "$XAAESDIR_V4E" "col"
 
 copy_xaaes "$XAAESDIR_000" "000"
 copy_xaaes "$XAAESDIR_020" "02060"
 copy_xaaes "$XAAESDIR_V4E" "col"
 
-copy_usbloader "$USBDIR_000"
-# TODO: 020, V4E (done as a separate step)
+copy_usbloader "$USBDIR_000" "000"
+copy_usbloader "$USBDIR_020" "02060"
+copy_usbloader "$USBDIR_V4E" "col"
 
 copy_usb "$USBDIR_000" "000"
 copy_usb "$USBDIR_020" "02060"
@@ -92,8 +98,9 @@ copy_tbl "$TBLDIR_000"
 copy_tbl "$TBLDIR_020"
 copy_tbl "$TBLDIR_V4E"
 
-copy_sysroot "$SYSROOT_000"
-# TODO: 020, V4E (done as a separate step)
+copy_sysroot "$SYSROOT_000" "000"
+copy_sysroot "$SYSROOT_020" "02060"
+copy_sysroot "$SYSROOT_V4E" "col"
 
 # Atari hardware only
 mkdir -p "$SYSROOT_020/bin"
