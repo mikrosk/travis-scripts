@@ -295,6 +295,10 @@ copy_usb() {
 	then
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_$TARGET/netusbee.ucd" "$USBDIR"
 	fi
+	if [ "$TARGET" = "060" ] || [ "$TARGET" = "02060" ]
+	then
+	cp "$SRC/sys/usb/src.km/ucd/ethernat/ethernat.ucd" "$USBDIR"
+	fi 
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_$TARGET/unicorn.ucd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_$TARGET/eth.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/keyboard/.compile_$TARGET/keyboard.udd" "$USBDIR"
