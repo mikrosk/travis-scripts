@@ -44,12 +44,12 @@ but the keyboard layout to Norwegian/Swedish.
 This ROM image has been built using:
 make aranym
 
-This release has been built on Windows/Cygwin, using
+This release has been built on Linux Mint (a Ubuntu derivative), using
 Vincent Rivière's GCC 4.6.4 cross-compiler.  The custom tools used in
-the build process were built with native GCC 6.4.0.
+the build process were built with native GCC 4.8.4.
 
 The source package and other binary packages are available at:
-http://sourceforge.net/projects/emutos/files/emutos/0.9.9.1/
+http://sourceforge.net/projects/emutos/files/emutos/0.9.10/
 
 If you want to read more about EmuTOS, please take a look at these files:
 
