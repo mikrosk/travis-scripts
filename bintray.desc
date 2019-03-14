@@ -6,12 +6,12 @@
     },
 
     "version": {
-        "name": "master"
+        "name": "master2"
     },
 
     "files":
         [
-        {"includePattern": "build/travis-freemint-master.tar.bz2", "uploadPattern": "travis-freemint-master.tar.bz2", "matrixParams": {"override": 1}}
+        {"includePattern": "build/travis-freemint-master.tar.bz2", "uploadPattern": "travis-freemint-master2.tar.bz2", "matrixParams": {"override": 1}}
         ],
     "publish": true
 }
