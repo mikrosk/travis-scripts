@@ -7,5 +7,7 @@ LIBCMINI_URL="https://github.com/mfro0/libcmini/releases/download"
 LIBCMINI_VERSION="0.49"
 
 cd ..
-wget -qO- "$LIBCMINI_URL/v$LIBCMINI_VERSION/libcmini-$LIBCMINI_VERSION.tar.gz" | tar xzf -
+mkdir libcmini
+wget -q "$LIBCMINI_URL/v$LIBCMINI_VERSION/libcmini-$LIBCMINI_VERSION.tar.gz"
+tar xzvf "libcmini-$LIBCMINI_VERSION.tar.gz" -C libcmini
 cd -
