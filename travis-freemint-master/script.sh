@@ -4,6 +4,7 @@
 # -x: Display expanded script commands
 
 export M68K_ATARI_MINT_CROSS=yes
+export LIBCMINI=yes
 
 SHORT_ID=$(git log -n1 --format="%H" | cut -c 1-3)
 PROJECT=$(echo "${TRAVIS_REPO_SLUG}" | cut -d '/' -f 2)
