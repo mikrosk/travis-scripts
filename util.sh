@@ -524,16 +524,20 @@ copy_sysroot() {
 
 create_filesystem() {
 	mkdir -p "$SYSROOT"/{bin,etc,root,tmp,var/run}
+	local coreutils="cat cp env ln ls md5sum mkdir mv rm"
 
 	if [ "$CPU_TARGET" = "000" ]
 	then
 		cp "$BASH_DIR/bash000.ttp" "$SYSROOT/bin/bash"
+		for exe in $coreutils; do cp "$COREUTILS_DIR/${exe}000.ttp" "$SYSROOT/bin/${exe}"; done
 	elif [ "$CPU_TARGET" = "col" ]
 	then
 		cp "$BASH_DIR/bashv4e.ttp" "$SYSROOT/bin/bash"
+		for exe in $coreutils; do cp "$COREUTILS_DIR/${exe}v4e.ttp" "$SYSROOT/bin/${exe}"; done
 	else
 		# 02060, 030, 040, 060
 		cp "$BASH_DIR/bash020.ttp" "$SYSROOT/bin/bash"
+		for exe in $coreutils; do cp "$COREUTILS_DIR/${exe}020.ttp" "$SYSROOT/bin/${exe}"; done
 	fi
 
 	echo "root:x:0:0::/root:/bin/bash" > "$SYSROOT/etc/passwd"

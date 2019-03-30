@@ -9,6 +9,7 @@ VER="$3"
 CUR="$4"
 TERADESK_DIR="$5"
 BASH_DIR="$6"
+COREUTILS_DIR="$7"
 
 HERE="$(dirname "$0")"
 . "$HERE/util.sh"
