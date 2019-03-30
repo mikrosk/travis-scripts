@@ -544,6 +544,7 @@ create_filesystem() {
 
 	echo "PS1='[\\[\\e[31m\\]\\u\\[\\e[m\\]@\\[\\e[32m\\]\\h\\[\\e[m\\] \\W]\\$ '" > "$SYSROOT/etc/profile"
 	echo "export PS1" >> "$SYSROOT/etc/profile"
+	echo "alias ls='ls --color'" >> "$SYSROOT/etc/profile"
 
 	touch "$SYSROOT/var/run/utmp"
 
