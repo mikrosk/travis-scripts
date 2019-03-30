@@ -27,9 +27,9 @@ then
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
 	if [ -n "${VERSIONED+x}" ]
 	then
-		cd "${DST}/.." && zip -r -9 "${OUT}/${PROJECT}-${LONG_VERSION}-aranym${VERSIONED}.zip" "$(basename ${DST})" && cd -
+		cd "${DST}/.." && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-aranym${VERSIONED}.zip" "$(basename ${DST})" && cd -
 	else
-		cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${LONG_VERSION}-aranym.zip" * && cd -
+		cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-aranym.zip" * && cd -
 	fi
 elif [ "$CPU_TARGET" = "prg" ]
 then
@@ -38,11 +38,11 @@ then
 	DST="${TMP}/usb4tos-${SHORT_VERSION}"
 	"./.travis/prepare-usb4tos.sh" "${PWD}" "${DST}"
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
-	cd "${DST}/.." && zip -r -9 "${OUT}/usb4tos-${LONG_VERSION}.zip" "$(basename ${DST})" && cd -
+	cd "${DST}/.." && zip -r -9 "${OUT}/usb4tos-${SHORT_VERSION}.zip" "$(basename ${DST})" && cd -
 else
 	make
 	DST="${TMP}/mint-${SHORT_VERSION}-${CPU_TARGET}"
 	"./.travis/prepare-snapshot.sh" "${PWD}" "${DST}" "${SHORT_VERSION}" "${SHORT_ID}" "${TERADESK}" "${BASH}"
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
-	cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${LONG_VERSION}-${CPU_TARGET}${VERSIONED}.zip" * && cd -
+	cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-${CPU_TARGET}${VERSIONED}.zip" * && cd -
 fi

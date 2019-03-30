@@ -11,7 +11,12 @@ if [ -n "${VERSIONED+x}" ]
 then
 	sed -i -e "s/PACKAGE_NAME/snapshots/g;" .travis/bintray.desc
 else
-	sed -i -e "s/PACKAGE_NAME/snapshots-cpu/g;" .travis/bintray.desc
+	if [ "$CPU_TARGET" = "prg" ]
+	then
+		sed -i -e "s/PACKAGE_NAME/snapshots-usb4tos/g;" .travis/bintray.desc
+	else
+		sed -i -e "s/PACKAGE_NAME/snapshots-cpu/g;" .travis/bintray.desc
+	fi
 fi
 
 sed -i -e "s/MINT_MAJ_VERSION-MINT_MIN_VERSION-MINT_PATCH_LEVEL/${LONG_VERSION}/g;" .travis/bintray.desc

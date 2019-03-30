@@ -13,7 +13,12 @@ if [ -n "${VERSIONED+x}" ]
 then
 	PACKAGE_NAME="snapshots"
 else
-	PACKAGE_NAME="snapshots-cpu"
+	if [ "$CPU_TARGET" = "prg" ]
+	then
+		PACKAGE_NAME="snapshots-usb4tos"
+	else
+		PACKAGE_NAME="snapshots-cpu"
+	fi
 fi
 
 # why do we need this, no clue...
