@@ -3,20 +3,19 @@
 # -u: Treat unset variables as an error when substituting.
 # -x: Display expanded script commands
 
-VERSION=$(/tmp/version)
-MINT_MAJ_VERSION=$(echo ${VERSION} | cut -d - -f 1)
-MINT_MIN_VERSION=$(echo ${VERSION} | cut -d - -f 2)
-MINT_PATCH_LEVEL=$(echo ${VERSION} | cut -d - -f 3)
+HERE="$(dirname "$0")"
+. "$HERE/version.sh"
+. "$HERE/commit.sh"
 
-TRAVIS_COMMIT=$(echo ${TRAVIS_COMMIT} | cut -c 1-8)
-
-if [ ${#MINT_PATCH_LEVEL} -eq 3 ]
+if [ -n "${VERSIONED+x}" ]
 then
-	MINT_PATCH_LEVEL=${TRAVIS_COMMIT}
+	sed -i -e "s/PACKAGE_NAME/snapshots/g;" .travis/bintray.desc
+else
+	sed -i -e "s/PACKAGE_NAME/snapshots-cpu/g;" .travis/bintray.desc
 fi
 
-sed -i -e "s/MINT_MAJ_VERSION-MINT_MIN_VERSION-MINT_PATCH_LEVEL/${MINT_MAJ_VERSION}-${MINT_MIN_VERSION}-${MINT_PATCH_LEVEL}/g;" .travis/bintray.desc
-sed -i -e "s/COMMIT_ID/${TRAVIS_COMMIT}/g;" .travis/bintray.desc
+sed -i -e "s/MINT_MAJ_VERSION-MINT_MIN_VERSION-MINT_PATCH_LEVEL/${LONG_VERSION}/g;" .travis/bintray.desc
+sed -i -e "s/COMMIT_ID/${LONG_ID}/g;" .travis/bintray.desc
 USER=$(echo "${TRAVIS_REPO_SLUG}" | cut -d '/' -f 1)
 PROJECT=$(echo "${TRAVIS_REPO_SLUG}" | cut -d '/' -f 2)
-sed -i -e "s/COMMIT_URL/https:\/\/github.com\/${USER}\/${PROJECT}\/commit\/${TRAVIS_COMMIT}/g;" .travis/bintray.desc
+sed -i -e "s/COMMIT_URL/https:\/\/github.com\/${USER}\/${PROJECT}\/commit\/${LONG_ID}/g;" .travis/bintray.desc

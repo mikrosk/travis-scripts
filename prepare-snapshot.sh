@@ -7,102 +7,119 @@ SRC="$1"
 DST="$2"
 VER="$3"
 CUR="$4"
+TERADESK_DIR="$5"
+BASH_DIR="$6"
 
-PWD="$(dirname "$0")"
-. "$PWD/util.sh"
+HERE="$(dirname "$0")"
+. "$HERE/util.sh"
+. "$HERE/kernel_targets.sh"
 
-# three separate CPU classes (and archives): 000, 020-60, V4E
-AUTODIR_000="$DST/000/auto"
-MINTDIR_000="$DST/000/mint/$VER"
-XAAESDIR_000="$MINTDIR_000/xaaes"
-SYSROOT_000="$MINTDIR_000/sysroot"
-USBDIR_000="$MINTDIR_000/usb"
-TBLDIR_000="$MINTDIR_000/keyboard"
-FONTSDIR_000="$MINTDIR_000/fonts"
-
-AUTODIR_020="$DST/020/auto"
-MINTDIR_020="$DST/020/mint/$VER"
-XAAESDIR_020="$MINTDIR_020/xaaes"
-SYSROOT_020="$MINTDIR_020/sysroot"
-USBDIR_020="$MINTDIR_020/usb"
-TBLDIR_020="$MINTDIR_020/keyboard"
-FONTSDIR_020="$MINTDIR_020/fonts"
-
-AUTODIR_V4E="$DST/col/auto"
-MINTDIR_V4E="$DST/col/mint/$VER"
-XAAESDIR_V4E="$MINTDIR_V4E/xaaes"
-SYSROOT_V4E="$MINTDIR_V4E/sysroot"
-USBDIR_V4E="$MINTDIR_V4E/usb"
-TBLDIR_V4E="$MINTDIR_V4E/keyboard"
-FONTSDIR_V4E="$MINTDIR_V4E/fonts"
-
-# 68000 only (*.prg)
-USB4TOSDIR="$DST/usb4tos"
-
-copy_auto "$AUTODIR_000" "000"
-copy_auto "$AUTODIR_020" "02060"
-copy_auto "$AUTODIR_V4E" "col"
+AUTODIR="$DST/auto"
+MINTDIR="$DST/mint/$VER"
+XAAESDIR="$MINTDIR/xaaes"
+SYSROOT="$MINTDIR/sysroot"
+USBDIR="$MINTDIR/usb"
+TBLDIR="$MINTDIR/keyboard"
+FONTSDIR="$MINTDIR/fonts"
 
 # TODO: mintloader doesn't detect Hatari (but it could via trap #1 handler pointing to the cartridge area)
-copy_kernel "$MINTDIR_000" "000" "hat"
-copy_kernel "$MINTDIR_020" "030" "040" "060" "mil" "ara"
-copy_kernel "$MINTDIR_V4E" "col"
-
-copy_modules "$MINTDIR_000" "000"
-copy_modules "$MINTDIR_020" "02060"
-copy_modules "$MINTDIR_V4E" "col"
+if [ -n "${VERSIONED+x}" ]
+then
+	copy_auto "$AUTODIR" "$CPU_TARGET" "$CUR"
+	copy_kernel "$MINTDIR" "$KERNEL_TARGETS"
+	copy_kernel_docs "$MINTDIR" "yes"
+else
+	copy_kernel "$AUTODIR" "$KERNEL_TARGETS"
+	copy_kernel_docs "$MINTDIR" "no"
+fi
+copy_modules "$MINTDIR" "$CPU_TARGET"
 
 # mchdir: st, ste, megaste, tt, falcon, milan, hades, ct60, firebee, aranym
-copy_m68k_modules "$MINTDIR_000"
-copy_st_modules "$MINTDIR_000"
-# TODO: this one is not detected by FreeMiNT !!!
-copy_megast_modules "$MINTDIR_000"
-copy_ste_modules "$MINTDIR_000"
-copy_megaste_modules "$MINTDIR_000"
+if [ "$CPU_TARGET" != "col" ]
+then
+	copy_m68k_modules "$MINTDIR"
+	if [ "$CPU_TARGET" = "000" ]
+	then
+		copy_st_modules "$MINTDIR"
+		# TODO: this one is not detected by FreeMiNT !!!
+		copy_megast_modules "$MINTDIR"
+		copy_ste_modules "$MINTDIR"
+		copy_megaste_modules "$MINTDIR"
+	elif [ "$CPU_TARGET" = "02060" ]
+	then
+		copy_tt_modules "$MINTDIR"
+		copy_falcon_modules "$MINTDIR"
+		copy_milan_modules "$MINTDIR"
+		copy_hades_modules "$MINTDIR"
+		copy_ct60_modules "$MINTDIR"
+	elif [ "$CPU_TARGET" = "030" ]
+	then
+		copy_tt_modules "$MINTDIR"
+		copy_falcon_modules "$MINTDIR"
+	elif [ "$CPU_TARGET" = "040" ]
+	then
+		copy_milan_modules "$MINTDIR"
+		copy_hades_modules "$MINTDIR"
+	elif [ "$CPU_TARGET" = "060" ]
+	then
+		copy_milan_modules "$MINTDIR"
+		copy_hades_modules "$MINTDIR"
+		copy_falcon_modules "$MINTDIR"
+		copy_ct60_modules "$MINTDIR"
+	fi
+else
+	copy_firebee_modules "$MINTDIR"
+fi
 
-copy_m68k_modules "$MINTDIR_020"
-copy_tt_modules "$MINTDIR_020"
-copy_falcon_modules "$MINTDIR_020"
-copy_milan_modules "$MINTDIR_020"
-copy_hades_modules "$MINTDIR_020"
-copy_ct60_modules "$MINTDIR_020"
+copy_xaloader "$XAAESDIR" "$CPU_TARGET"
+if [ -n "${VERSIONED+x}" ]
+then
+	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "yes"
+else
+	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "no"
+fi
 
-copy_firebee_modules "$MINTDIR_V4E"
+copy_usbloader "$USBDIR" "$CPU_TARGET"
+copy_usb "$USBDIR" "$CPU_TARGET"
+if [ "$CPU_TARGET" != "col" ]
+then
+	copy_atari_usb_modules "$USBDIR" "$CPU_TARGET"
+	if [ "$CPU_TARGET" = "02060" ]
+	then
+		# EtherNAT
+		copy_ct60_usb_modules "$USBDIR"
+		# CTPCI / Milan / Hades
+		copy_ehci_usb_modules "$USBDIR" "$CPU_TARGET"
+	elif [ "$CPU_TARGET" = "040" ]
+	then
+		# Milan / Hades
+		copy_ehci_usb_modules "$USBDIR" "$CPU_TARGET"
+	elif [ "$CPU_TARGET" = "060" ]
+	then
+		# EtherNAT
+		copy_ct60_usb_modules "$USBDIR"
+		# CTPCI / Milan / Hades
+		copy_ehci_usb_modules "$USBDIR" "$CPU_TARGET"
+	fi
+else
+	copy_ehci_usb_modules "$USBDIR" "$CPU_TARGET"
+fi
 
-copy_xaloader "$XAAESDIR_000" "000"
-copy_xaloader "$XAAESDIR_020" "02060"
-copy_xaloader "$XAAESDIR_V4E" "col"
+copy_fonts "$FONTSDIR"
+copy_tbl "$TBLDIR"
 
-copy_xaaes "$XAAESDIR_000" "000"
-copy_xaaes "$XAAESDIR_020" "02060"
-copy_xaaes "$XAAESDIR_V4E" "col"
-
-copy_usbloader "$USBDIR_000" "000"
-copy_usbloader "$USBDIR_020" "02060"
-copy_usbloader "$USBDIR_V4E" "col"
-
-copy_usb "$USBDIR_000" "000"
-copy_usb "$USBDIR_020" "02060"
-# unfortunately the usb loader isn't aware of SYSDIR or MCHDIR
-cp "$SRC/sys/usb/src.km/ucd/ethernat/ethernat.ucd" "$USBDIR_020"
-cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR_020"
-copy_usb "$USBDIR_V4E" "col"
-
-copy_usb4tos
-
-copy_fonts "$FONTSDIR_000"
-copy_fonts "$FONTSDIR_020"
-copy_fonts "$FONTSDIR_V4E"
-
-copy_tbl "$TBLDIR_000"
-copy_tbl "$TBLDIR_020"
-copy_tbl "$TBLDIR_V4E"
-
-copy_sysroot "$SYSROOT_000" "000"
-copy_sysroot "$SYSROOT_020" "02060"
-copy_sysroot "$SYSROOT_V4E" "col"
-
+copy_sysroot "$SYSROOT" "$CPU_TARGET"
 # Atari hardware only
-mkdir -p "$SYSROOT_020/bin"
-cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT_000/bin/actrl.ttp"
-cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT_020/bin/actrl.ttp"
+mkdir -p "$SYSROOT/bin"
+if [ "$CPU_TARGET" != "col" ]
+then
+	cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
+fi
+
+if [ -n "${VERSIONED+x}" ]
+then
+	create_filesystem
+
+	cat "$MINTDIR/mint.cnf"
+	cat "$XAAESDIR/xaaes.cnf"
+fi

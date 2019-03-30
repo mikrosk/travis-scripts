@@ -6,56 +6,75 @@
 SRC="$1"
 DST="$2"
 VER="$3"
-CUR="$4"
-ARANYM_DIR="$5"
+ARANYM_DIR="$4"
+TERADESK_DIR="$5"
+BASH_DIR="$6"
 
-PWD="$(dirname "$0")"
-. "$PWD/util.sh"
+HERE="$(dirname "$0")"
+. "$HERE/util.sh"
 
-ROOT="$DST/drive_c"
-MINTDIR_020="$ROOT/mint/$VER"
-XAAESDIR_020="$MINTDIR_020/xaaes"
-SYSROOT_020="$MINTDIR_020/sysroot"
-USBDIR_020="$MINTDIR_020/usb"
-TBLDIR_020="$MINTDIR_020/keyboard"
-FONTSDIR_020="$MINTDIR_020/fonts"
+if [ -n "${VERSIONED+x}" ]
+then
+	ROOT="$DST/drive_c"
+else
+	ROOT="$DST"
+fi
+MINTDIR="$ROOT/mint/$VER"
+XAAESDIR="$MINTDIR/xaaes"
+SYSROOT="$MINTDIR/sysroot"
+USBDIR="$MINTDIR/usb"
+TBLDIR="$MINTDIR/keyboard"
+FONTSDIR="$MINTDIR/fonts"
 
-copy_kernel "$MINTDIR_020" "ara"
-copy_modules "$MINTDIR_020" "02060"
-copy_aranym_modules "$MINTDIR_020"
+copy_kernel "$MINTDIR" "ara"
+if [ -n "${VERSIONED+x}" ]
+then
+	copy_kernel_docs "$MINTDIR" "yes"
+else
+	copy_kernel_docs "$MINTDIR" "no"
+fi
+copy_modules "$MINTDIR" "040"
+copy_aranym_modules "$MINTDIR"
 
-copy_xaloader "$XAAESDIR_020" "02060"
-copy_xaaes "$XAAESDIR_020" "02060"
+copy_xaloader "$XAAESDIR" "040"
+if [ -n "${VERSIONED+x}" ]
+then
+	copy_xaaes "$XAAESDIR" "040" "yes"
+else
+	copy_xaaes "$XAAESDIR" "040" "no"
+fi
 
-copy_usbloader "$USBDIR_020" "02060"
-copy_usb "$USBDIR_020" "02060"
-# unfortunately the usb loader isn't aware of SYSDIR or MCHDIR
-cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR_020"
+copy_usbloader "$USBDIR" "040"
+copy_usb "$USBDIR" "040"
+copy_aranym_usb_modules "$USBDIR"
 
-copy_fonts "$FONTSDIR_020"
-copy_tbl "$TBLDIR_020"
+copy_fonts "$FONTSDIR"
+copy_tbl "$TBLDIR"
 
-copy_sysroot "$SYSROOT_020" "02060"
-mkdir -p "$SYSROOT_020/bin"
-cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT_020/bin/actrl.ttp"
+copy_sysroot "$SYSROOT" "040"
+mkdir -p "$SYSROOT/bin"
+cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
 
 ############
 # filesystem
 ############
 
-mkdir -p "$DST"
+if [ -n "${VERSIONED+x}" ]
+then
+	mkdir -p "$DST"
 
-cp -r "$ARANYM_DIR/emutos" "$DST"
-cp -r "$ARANYM_DIR/config" "$DST"
-cp -r "$ARANYM_DIR"/runme.* "$DST"
+	cp -r "$ARANYM_DIR/emutos" "$DST"
+	cp -r "$ARANYM_DIR/config" "$DST"
+	cp -r "$ARANYM_DIR"/runme.* "$DST"
 
-sed -e "s/^Bootstrap = mintara.prg/Bootstrap = drive_c\/mint\/$VER\/mintara.prg/;" "$DST/config" > "$DST/config.tmp" && mv "$DST/config.tmp" "$DST/config"
+	sed -e "s/^Bootstrap = mintara.prg/Bootstrap = drive_c\/mint\/$VER\/mintara.prg/;" "$DST/config" > "$DST/config.tmp" && mv "$DST/config.tmp" "$DST/config"
 
-mkdir -p "$ROOT"
-cp -r "$ARANYM_DIR/fvdi"/* "$ROOT"
-sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR_020/mint.cnf" > "$MINTDIR_020/mint.cnf.tmp" && mv "$MINTDIR_020/mint.cnf.tmp" "$MINTDIR_020/mint.cnf"
+	mkdir -p "$ROOT"
+	cp -r "$ARANYM_DIR/fvdi"/* "$ROOT"
+	sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 
-cp -r "$ARANYM_DIR/teradesk" "$ROOT"
-sed -e "s/^#setenv AVSERVER   \"DESKTOP \"/setenv AVSERVER   \"DESKTOP \"/;" "$XAAESDIR_020/xaaes.cnf" > "$XAAESDIR_020/xaaes.cnf.tmp" && mv "$XAAESDIR_020/xaaes.cnf.tmp" "$XAAESDIR_020/xaaes.cnf"
-sed -e "s/^#setenv FONTSELECT \"DESKTOP \"/setenv FONTSELECT \"DESKTOP \"/;" "$XAAESDIR_020/xaaes.cnf" > "$XAAESDIR_020/xaaes.cnf.tmp" && mv "$XAAESDIR_020/xaaes.cnf.tmp" "$XAAESDIR_020/xaaes.cnf"
-sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = c:\\\\teradesk\\\\desktop.prg/;" "$XAAESDIR_020/xaaes.cnf" > "$XAAESDIR_020/xaaes.cnf.tmp" && mv "$XAAESDIR_020/xaaes.cnf.tmp" "$XAAESDIR_020/xaaes.cnf"
+	create_filesystem
+
+	cat "$MINTDIR/mint.cnf"
+	cat "$XAAESDIR/xaaes.cnf"
+fi

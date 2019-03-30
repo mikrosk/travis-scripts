@@ -1,6 +1,6 @@
 {
     "package": {
-        "name": "snapshots",
+        "name": "PACKAGE_NAME",
         "repo": "freemint",
         "subject": "freemint"
     },
@@ -12,7 +12,7 @@
     },
 
     "files": [
-        {"includePattern": "\.travis/(.*\\.zip)", "uploadPattern": "snapshots/$1", "matrixParams": {"override": 1}}
+        {"includePattern": "\.travis/(.*\\.zip)", "uploadPattern": "PACKAGE_NAME/$1", "matrixParams": {"override": 1}}
     ],
 
     "publish": true

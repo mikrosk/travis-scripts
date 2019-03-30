@@ -1,25 +1,41 @@
-#!/bin/bash -eux
-# -e: Exit immediately if a command exits with a non-zero status.
-# -u: Treat unset variables as an error when substituting.
-# -x: Display expanded script commands
+# use as: . util.sh
 
 copy_auto() {
-	AUTODIR="$1"
-	TARGET="$2"
+	local AUTODIR="$1"
+	local TARGET="$2"
+	local CUR="$3"
 	mkdir -p "$AUTODIR"
 	cp "$SRC/tools/mintload/.compile_$TARGET/mintload.prg" "$AUTODIR/mint-$CUR.prg"
 }
 
 copy_kernel() {
-	MINTDIR="$1"
+	local MINTDIR="$1"
 	mkdir -p "$MINTDIR"
 	shift
 	for TARGET in $*
 	do
 		cp "$SRC/sys/.compile_$TARGET"/mint*.prg "$MINTDIR"
 	done
+}
+
+copy_kernel_docs() {
+	local MINTDIR="$1"
+	local BOOTABLE="$2"
+	mkdir -p "$MINTDIR"
+	if [ "$BOOTABLE" = "yes" ]
+	then
 	cp "$SRC/doc/examples/mint.cnf" "$MINTDIR"/mint.cnf
+	sed -e "s/#sln e:\/bin      u:\/bin/sln c:\/mint\/$VER\/sysroot\/bin      u:\/bin/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#sln e:\/etc      u:\/etc/sln c:\/mint\/$VER\/sysroot\/etc      u:\/etc/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#sln e:\/root     u:\/root/sln c:\/mint\/$VER\/sysroot\/root     u:\/root/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#sln e:\/tmp      u:\/tmp/sln c:\/mint\/$VER\/sysroot\/tmp      u:\/tmp/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#sln e:\/var      u:\/var/sln c:\/mint\/$VER\/sysroot\/var      u:\/var/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#setenv LOGNAME root/setenv LOGNAME root/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#setenv USER    root/setenv USER    root/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#setenv HOME    \/root/setenv HOME    \/root/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "s/#setenv SHELL   \/bin\/bash/setenv SHELL   \/bin\/bash/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 	sed -e "s/#GEM=u:\/c\/mint\/xaaes\/xaloader.prg/GEM=u:\/c\/mint\/$VER\/xaaes\/xaloader.prg/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	fi
 	mkdir -p "$MINTDIR/doc"
 	cp "$SRC/COPYING" "$MINTDIR/doc"
 	cp "$SRC/COPYING.GPL" "$MINTDIR/doc"
@@ -28,8 +44,8 @@ copy_kernel() {
 }
 
 copy_modules() {
-	MINTDIR="$1"
-	TARGET="$2"
+	local MINTDIR="$1"
+	local TARGET="$2"
 	mkdir -p "$MINTDIR"
 	mkdir -p "$MINTDIR/doc"
 	cp "$SRC/sys/sockets/.compile_$TARGET/inet4.xdd" "$MINTDIR"
@@ -53,7 +69,7 @@ copy_modules() {
 
 # modules compatible with all m68k machines (except the FireBee...)
 copy_m68k_modules() {
-	SYSDIR="$1"
+	local SYSDIR="$1"
 	mkdir -p "$SYSDIR"
 	mkdir -p "$SYSDIR/doc"
 	cp "$SRC/sys/sockets/xif/asix.xif" "$SYSDIR/asix.xix"
@@ -70,7 +86,7 @@ copy_m68k_modules() {
 
 # mchdir: st, ste, megaste, tt, falcon, milan, hades, ct60, firebee, aranym
 copy_st_modules() {
-	MCHDIR="$1/st"
+	local MCHDIR="$1/st"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	# TODO: perhaps these four are compatible also with other machines
@@ -92,7 +108,7 @@ copy_st_modules() {
 	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_megast_modules() {
-	MCHDIR="$1/megast"
+	local MCHDIR="$1/megast"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/lance.xif" "$MCHDIR/lance.xix"
@@ -109,7 +125,7 @@ copy_megast_modules() {
 	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_ste_modules() {
-	MCHDIR="$1/ste"
+	local MCHDIR="$1/ste"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/rtl8012st.xif" "$MCHDIR/rtl8012st.xix"
@@ -120,7 +136,7 @@ copy_ste_modules() {
 	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_megaste_modules() {
-	MCHDIR="$1/megaste"
+	local MCHDIR="$1/megaste"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/rieblste.xif" "$MCHDIR/rieblste.xix"
@@ -138,7 +154,7 @@ copy_megaste_modules() {
 	cp "$SRC/sys/xdd/scc/ports.txt" "$MCHDIR/doc/scc"
 }
 copy_tt_modules() {
-	MCHDIR="$1/tt"
+	local MCHDIR="$1/tt"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/daynaport/scsilink.xif" "$MCHDIR/scsilink.xix"
@@ -161,7 +177,7 @@ copy_tt_modules() {
 	cp "$SRC/sys/xdd/scc/ports.txt" "$MCHDIR/doc/scc"
 }
 copy_falcon_modules() {
-	MCHDIR="$1/falcon"
+	local MCHDIR="$1/falcon"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/rtl8012.xif" "$MCHDIR/rtl8012.xix"
@@ -178,7 +194,7 @@ copy_falcon_modules() {
 	cp "$SRC/sys/xdd/scc/ports.txt" "$MCHDIR/doc/scc"
 }
 copy_milan_modules() {
-	MCHDIR="$1/milan"
+	local MCHDIR="$1/milan"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/xdd/uart/uart.xdd" "$MCHDIR"
@@ -193,7 +209,7 @@ copy_milan_modules() {
 	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_hades_modules() {
-	MCHDIR="$1/hades"
+	local MCHDIR="$1/hades"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/xdd/mfp/mfp.xdd" "$MCHDIR"
@@ -203,7 +219,7 @@ copy_hades_modules() {
 	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_ct60_modules() {
-	MCHDIR="$1/ct60"
+	local MCHDIR="$1/ct60"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 
@@ -220,14 +236,14 @@ copy_ct60_modules() {
 	cp "$SRC/sys/sockets/xif/svethlana/README" "$MCHDIR/doc/svethlan.txt"
 }
 copy_firebee_modules() {
-	MCHDIR="$1/firebee"
+	local MCHDIR="$1/firebee"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/fec/fec.xif" "$MCHDIR/fec.xif"
 	cp "$SRC/sys/sockets/xif/fec/README" "$MCHDIR/doc/fec.txt"
 }
 copy_aranym_modules() {
-	MCHDIR="$1/aranym"
+	local MCHDIR="$1/aranym"
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/nfeth/nfeth.xif" "$MCHDIR"
@@ -244,23 +260,27 @@ copy_aranym_modules() {
 }
 
 copy_xaloader() {
-	XAAESDIR="$1"
-	TARGET="$2"
+	local XAAESDIR="$1"
+	local TARGET="$2"
 	mkdir -p "$XAAESDIR"
 	cp "$SRC/xaaes/src.km/xaloader/.compile_$TARGET/xaloader.prg" "$XAAESDIR"
 }
 
 copy_xaaes() {
-	XAAESDIR="$1"
-	TARGET="$2"
+	local XAAESDIR="$1"
+	local TARGET="$2"
+	local BOOTABLE="$3"
+	mkdir -p "$XAAESDIR"
 	if [ "$TARGET" = "col" ]
 	then
-        KM_TARGET="v4e"
+	cp "$SRC/xaaes/src.km/xaaesv4e.km" "$XAAESDIR/xaaes.km"
+	elif [ "$TARGET" = "000" ]
+	then
+	cp "$SRC/xaaes/src.km/xaaesst.km" "$XAAESDIR/xaaesst.km"
+	cp "$SRC/xaaes/src.km/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
 	else
-        KM_TARGET="$TARGET"
+	cp "$SRC/xaaes/src.km/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
 	fi
-	mkdir -p "$XAAESDIR"
-	cp "$SRC/xaaes/src.km/xaaes$KM_TARGET.km" "$XAAESDIR/xaaes.km"
 	cp "$SRC/xaaes/src.km/adi/whlmoose/.compile_$TARGET/moose.adi" "$XAAESDIR"
 	cp "$SRC/xaaes/src.km/adi/whlmoose/.compile_$TARGET/moose_w.adi" "$XAAESDIR"
 	mkdir -p "$XAAESDIR/gradient"
@@ -271,36 +291,39 @@ copy_xaaes() {
 	cp "$SRC/xaaes/src.km/widgets"/*.rsc "$XAAESDIR/widgets"
 	mkdir -p "$XAAESDIR/xobj"
 	cp "$SRC/xaaes/src.km/xobj"/*.rsc "$XAAESDIR/xobj"
+	if [ "$BOOTABLE" = "yes" ]
+	then
 	cp "$SRC/xaaes/src.km/example.cnf" "$XAAESDIR/xaaes.cnf"
 	sed -e "s/^setenv TOSRUN		u:\\\\usr\\\\gem\\\\toswin2\\\\tw-call.app/setenv TOSRUN		u:\\\\c\\\\mint\\\\$VER\\\\sysroot\\\\GEM\\\\toswin2\\\\tw-call.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	sed -e "s/^run c:\\\\tools\\\\toswin2.app/run u:\\\\c\\\\mint\\\\$VER\\\\sysroot\\\\GEM\\\\toswin2\\\\toswin2.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^#setenv AVSERVER   \"DESKTOP \"/setenv AVSERVER   \"DESKTOP \"/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^#setenv FONTSELECT \"DESKTOP \"/setenv FONTSELECT \"DESKTOP \"/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	if [ "$TARGET" = "col" ]
+	then
+	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sysroot\\\\GEM\\\\teradesk\\\\desk_cf.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" &&
+	mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	else
+	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sysroot\\\\GEM\\\\teradesk\\\\desktop.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" &&
+	mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	fi
+	fi
 	cp "$SRC/xaaes/src.km"/xa_help.* "$XAAESDIR"
 	cp "$SRC/xaaes/src.km"/*.rsc "$XAAESDIR"
 	cp "$SRC/xaaes/src.km"/*.rsl "$XAAESDIR"
 }
 
 copy_usbloader() {
-	USBDIR="$1"
-	TARGET="$2"
+	local USBDIR="$1"
+	local TARGET="$2"
 	mkdir -p "$USBDIR"
 	cp "$SRC/sys/usb/src.km/loader/.compile_$TARGET/loader.prg" "$USBDIR"
 }
 
 copy_usb() {
-	USBDIR="$1"
-	TARGET="$2"
+	local USBDIR="$1"
+	local TARGET="$2"
 	mkdir -p "$USBDIR"
 	cp "$SRC/sys/usb/src.km/.compile_$TARGET"/*.km "$USBDIR/usb.km"
-	cp "$SRC/sys/usb/src.km/ucd/ehci/.compile_$TARGET/ehci.ucd" "$USBDIR"
-	if [ "$TARGET" != "col" ]
-	then
-	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_$TARGET/netusbee.ucd" "$USBDIR"
-	fi
-	if [ "$TARGET" = "060" ] || [ "$TARGET" = "02060" ]
-	then
-	cp "$SRC/sys/usb/src.km/ucd/ethernat/ethernat.ucd" "$USBDIR"
-	fi 
-	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_$TARGET/unicorn.ucd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_$TARGET/eth.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/keyboard/.compile_$TARGET/keyboard.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_$TARGET/mouse.udd" "$USBDIR"
@@ -308,7 +331,35 @@ copy_usb() {
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_$TARGET/storage.udd" "$USBDIR"
 }
 
+copy_atari_usb_modules() {
+	local USBDIR="$1"
+	local TARGET="$2"
+	mkdir -p "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_$TARGET/netusbee.ucd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_$TARGET/unicorn.ucd" "$USBDIR"
+}
+
+copy_ehci_usb_modules() {
+	local USBDIR="$1"
+	local TARGET="$2"
+	mkdir -p "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/ehci/.compile_$TARGET/ehci.ucd" "$USBDIR"
+}
+
+copy_ct60_usb_modules() {
+	local USBDIR="$1"
+	mkdir -p "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/ethernat/ethernat.ucd" "$USBDIR"
+}
+
+copy_aranym_usb_modules() {
+	local USBDIR="$1"
+	mkdir -p "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR"
+}
+
 copy_usb4tos() {
+	local USB4TOSDIR="$1"
 	mkdir -p "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/.compile_prg/usb.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_prg/unicorn.prg" "$USB4TOSDIR"
@@ -324,20 +375,20 @@ copy_usb4tos() {
 }
 
 copy_fonts() {
-	FONTSDIR="$1"
+	local FONTSDIR="$1"
 	mkdir -p "$FONTSDIR"
 	cp -r "$SRC/fonts"/* "$FONTSDIR"
 }
 
 copy_tbl() {
-	TBLDIR="$1"
+	local TBLDIR="$1"
 	mkdir -p "$TBLDIR"
 	cp -r "$SRC/sys/tbl"/* "$TBLDIR"
 }
 
 copy_sysroot() {
-	SYSROOT="$1"
-	TARGET="$2"
+	local SYSROOT="$1"
+	local TARGET="$2"
 	mkdir -p "$SYSROOT/GEM"
 
 	mkdir -p "$SYSROOT/GEM/cops"
@@ -470,4 +521,28 @@ copy_sysroot() {
 	mkdir -p "$SYSROOT/share/doc/nfs"
 	cp "$SRC/tools/nfs/COPYING" "$SYSROOT/share/doc/nfs"
 	cp "$SRC/tools/nfs/README" "$SYSROOT/share/doc/nfs"
+}
+
+create_filesystem() {
+	mkdir -p "$SYSROOT"/{bin,etc,root,tmp,var/run}
+
+	if [ "$CPU_TARGET" = "000" ]
+	then
+		cp "$BASH_DIR/bash000.ttp" "$SYSROOT/bin/bash"
+	elif [ "$CPU_TARGET" = "col" ]
+	then
+		cp "$BASH_DIR/bashv4e.ttp" "$SYSROOT/bin/bash"
+	else
+		# 02060, 030, 040, 060
+		cp "$BASH_DIR/bash020.ttp" "$SYSROOT/bin/bash"
+	fi
+
+	echo "root:x:0:0::/root:/bin/bash" > "$SYSROOT/etc/passwd"
+
+	echo "PS1='[\\[\\e[31m\\]\\u\\[\\e[m\\]@\\[\\e[32m\\]\\h\\[\\e[m\\] \\W]\\$ '" > "$SYSROOT/etc/profile"
+	echo "export PS1" >> "$SYSROOT/etc/profile"
+
+	touch "$SYSROOT/var/run/utmp"
+
+	cp -r "$TERADESK_DIR" "$SYSROOT/GEM"
 }
