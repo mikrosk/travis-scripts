@@ -12,7 +12,7 @@
     },
 
     "files": [
-        {"includePattern": "\.travis/(.*\\.zip)", "uploadPattern": "PACKAGE_NAME/$1", "matrixParams": {"override": 1}}
+        {"includePattern": "\.travis/(.*\\.zip)", "uploadPattern": "PACKAGE_NAME/MINT_MAJ_VERSION-MINT_MIN_VERSION-MINT_PATCH_LEVEL/$1", "matrixParams": {"override": 1}}
     ],
 
     "publish": true
