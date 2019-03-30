@@ -66,6 +66,8 @@ then
 		copy_hades_modules "$MINTDIR"
 		copy_falcon_modules "$MINTDIR"
 		copy_ct60_modules "$MINTDIR"
+		# not needed in 060 builds
+		rm -rf "$MINTDIR/falcon"
 	fi
 else
 	copy_firebee_modules "$MINTDIR"

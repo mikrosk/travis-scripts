@@ -84,7 +84,6 @@ copy_m68k_modules() {
 	cp "$SRC/sys/xdd/flop-raw/README" "$SYSDIR/doc/flop-raw.txt"
 }
 
-# mchdir: st, ste, megaste, tt, falcon, milan, hades, ct60, firebee, aranym
 copy_st_modules() {
 	local MCHDIR="$1/st"
 	mkdir -p "$MCHDIR"
