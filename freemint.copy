@@ -73,7 +73,6 @@ mkdir -p $DESTDIR/xaaes/xobj
 mkdir -p $DESTDIR/xaaes/img/{8b,hc}
 mkdir -p $DESTDIR/xaaes/gradient
 mkdir -p $DESTDIR/xaaes/pal
-mkdir -p $DESTDIR/xaaes/{02060,030,040,060,000,col}
 
 cp xaaes/src.km/*.km $DESTDIR/xaaes
 cp xaaes/src.km/{*.cnf,*.rsc,*.rsl,*.txt,xa_help.*,xaaes.cnf,xaloader/xaloader.prg} $DESTDIR/xaaes
