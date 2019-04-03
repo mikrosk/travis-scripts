@@ -49,29 +49,14 @@ cp ./sys/usb/src.km/loader/loader.prg $USBDIR
 cp ./sys/usb/src.km/.compile*/usb*.km $USBDIR
 cp ./sys/usb/src.km/ucd/*/*.ucd $USBDIR
 cp ./sys/usb/src.km/udd/*/*.udd $USBDIR
-cp ./sys/usb/src.km/ucd/*/.compile_000/*.ucd $USBDIR
-cp ./sys/usb/src.km/udd/*/.compile_000/*.udd $USBDIR
 
 # XFS
-mkdir $XFSDIR/{02060,030,040,060,000,col}
 cp sys/xfs/*/*.xfs $XFSDIR
-cp sys/xfs/*/.compile_02060/*.xfs $XFSDIR/02060
-cp sys/xfs/*/.compile_030/*.xfs $XFSDIR/030
-cp sys/xfs/*/.compile_040/*.xfs $XFSDIR/040
-cp sys/xfs/*/.compile_060/*.xfs $XFSDIR/060
-cp sys/xfs/*/.compile_000/*.xfs $XFSDIR/000
-cp sys/xfs/*/.compile_col/*.xfs $XFSDIR/col
 rm -f $XFSDIR/Makefile*
 
 # XDD
-mkdir $XDDDIR/{02060,030,040,060,000,col}
 cp sys/xdd/*/*.xdd $XDDDIR
-cp sys/xdd/*/.compile_02060/*.xdd sys/sockets/.compile_02060/*.xdd $XDDDIR/02060
-cp sys/xdd/*/.compile_030/*.xdd sys/sockets/.compile_030/*.xdd $XDDDIR/030
-cp sys/xdd/*/.compile_040/*.xdd sys/sockets/.compile_040/*.xdd $XDDDIR/040
-cp sys/xdd/*/.compile_060/*.xdd sys/sockets/.compile_060/*.xdd $XDDDIR/060
-cp sys/xdd/*/.compile_000/*.xdd sys/sockets/.compile_000/*.xdd $XDDDIR/000
-cp sys/xdd/*/.compile_col/*.xdd sys/sockets/.compile_col/*.xdd $XDDDIR/col
+cp sys/sockets/*.xdd $XDDDIR
 rm -f $XDDDIR/Makefile*
 
 # AUTO
