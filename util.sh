@@ -210,12 +210,13 @@ copy_milan_modules() {
 copy_hades_modules() {
 	local MCHDIR="$1/hades"
 	mkdir -p "$MCHDIR"
-	mkdir -p "$MCHDIR/doc"
-	cp "$SRC/sys/xdd/mfp/mfp.xdd" "$MCHDIR"
-	mkdir -p "$MCHDIR/doc/mfp"
-	cp "$SRC/sys/xdd/mfp/LIESMICH" "$MCHDIR/doc/mfp"
-	cp "$SRC/sys/xdd/mfp/README" "$MCHDIR/doc/mfp"
-	cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
+	# Hades serial ports are not Atari compatible
+	#mkdir -p "$MCHDIR/doc"
+	#cp "$SRC/sys/xdd/mfp/mfp.xdd" "$MCHDIR"
+	#mkdir -p "$MCHDIR/doc/mfp"
+	#cp "$SRC/sys/xdd/mfp/LIESMICH" "$MCHDIR/doc/mfp"
+	#cp "$SRC/sys/xdd/mfp/README" "$MCHDIR/doc/mfp"
+	#cp "$SRC/sys/xdd/mfp/ports.txt" "$MCHDIR/doc/mfp"
 }
 copy_ct60_modules() {
 	local MCHDIR="$1/ct60"
