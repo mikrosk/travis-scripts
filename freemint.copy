@@ -76,12 +76,7 @@ mkdir -p $DESTDIR/xaaes/pal
 
 cp xaaes/src.km/*.km $DESTDIR/xaaes
 cp xaaes/src.km/{*.cnf,*.rsc,*.rsl,*.txt,xa_help.*,xaaes.cnf,xaloader/xaloader.prg} $DESTDIR/xaaes
-cp xaaes/src.km/adi/whlmoose/.compile_02060/*.adi $DESTDIR/xaaes/02060
-cp xaaes/src.km/adi/whlmoose/.compile_030/*.adi $DESTDIR/xaaes/030
-cp xaaes/src.km/adi/whlmoose/.compile_040/*.adi $DESTDIR/xaaes/040
-cp xaaes/src.km/adi/whlmoose/.compile_060/*.adi $DESTDIR/xaaes/060
-cp xaaes/src.km/adi/whlmoose/.compile_000/*.adi $DESTDIR/xaaes/000
-cp xaaes/src.km/adi/whlmoose/.compile_col/*.adi $DESTDIR/xaaes/col
+cp xaaes/src.km/adi/whlmoose/*.adi $DESTDIR/xaaes
 #cp xaaes/src.km/widgets/{*.hrd,*.rsc} $DESTDIR/xaaes/widgets
 #cp xaaes/src.km/xobj/{*.hrd,*.rsc} $DESTDIR/xaaes/xobj
 cp xaaes/src.km/widgets/*.rsc $DESTDIR/xaaes/widgets
