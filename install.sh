@@ -4,7 +4,7 @@
 # -x: Display expanded script commands
 
 LIBCMINI_URL="https://github.com/mfro0/libcmini/releases/download"
-LIBCMINI_VERSION="0.49"
+LIBCMINI_VERSION="0.491"
 
 cd ..
 mkdir libcmini
