@@ -3,11 +3,11 @@
 # -u: Treat unset variables as an error when substituting.
 # -x: Display expanded script commands
 
-LIBCMINI_URL="https://github.com/mfro0/libcmini/releases/download"
-LIBCMINI_VERSION="0.491"
+LIBCMINI_URL=$(curl -s https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
+LIBCMINI_NAME=$(curl -s https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
 
 cd ..
 mkdir libcmini
-wget -q "$LIBCMINI_URL/v$LIBCMINI_VERSION/libcmini-$LIBCMINI_VERSION.tar.gz"
-tar xzvf "libcmini-$LIBCMINI_VERSION.tar.gz" -C libcmini
+wget -q "$LIBCMINI_URL"
+tar xzvf "$LIBCMINI_NAME" -C libcmini
 cd -
