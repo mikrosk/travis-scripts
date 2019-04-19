@@ -59,6 +59,7 @@ then
 		copy_falcon_modules "$MINTDIR"
 	elif [ "$CPU_TARGET" = "040" ]
 	then
+		copy_falcon_modules "$MINTDIR"
 		copy_milan_modules "$MINTDIR"
 		copy_hades_modules "$MINTDIR"
 	elif [ "$CPU_TARGET" = "060" ]
