@@ -28,9 +28,9 @@ then
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
 	if [ -n "${VERSIONED+x}" ]
 	then
-		cd "${DST}/.." && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-aranym${VERSIONED}.zip" "$(basename ${DST})" && cd -
+		cd "${DST}/.." && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-040-aranym${VERSIONED}.zip" "$(basename ${DST})" && cd -
 	else
-		cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-aranym.zip" * && cd -
+		cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-040-aranym.zip" * && cd -
 	fi
 elif [ "$CPU_TARGET" = "prg" ]
 then
