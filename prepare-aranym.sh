@@ -76,7 +76,4 @@ then
 	sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 
 	create_filesystem
-
-	cat "$MINTDIR/mint.cnf"
-	cat "$XAAESDIR/xaaes.cnf"
 fi

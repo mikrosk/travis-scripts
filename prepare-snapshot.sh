@@ -124,7 +124,4 @@ fi
 if [ -n "${VERSIONED+x}" ]
 then
 	create_filesystem
-
-	cat "$MINTDIR/mint.cnf"
-	cat "$XAAESDIR/xaaes.cnf"
 fi
