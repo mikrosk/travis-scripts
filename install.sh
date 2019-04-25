@@ -5,8 +5,6 @@
 
 CURL_HEADER="Authorization: token $GITHUB_OATH_TOKEN"
 
-curl -s -H "$CURL_HEADER" -i https://api.github.com/users/mikrosk
-
 LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
 LIBCMINI_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
 
