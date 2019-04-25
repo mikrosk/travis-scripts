@@ -20,4 +20,5 @@ QED_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/freem
 cd .travis
 wget -q "$QED_URL"
 unzip "$QED_NAME"
+rm "$QED_NAME"
 cd -
