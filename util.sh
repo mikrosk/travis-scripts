@@ -25,7 +25,7 @@ copy_kernel_docs() {
 	if [ "$BOOTABLE" = "yes" ]
 	then
 	cp "$SRC/doc/examples/mint.cnf" "$MINTDIR"/mint.cnf
-	sed -e "/^#sln e:\/sbin     u:\/sbin/a\nsln c:\/mint\/$VER\/sys-root\/share    u:\/share" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+	sed -e "/^#sln e:\/sbin     u:\/sbin/asln c:\/mint\/$VER\/sys-root\/share    u:\/share" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 	sed -e "s/#sln e:\/bin      u:\/bin/sln c:\/mint\/$VER\/sys-root\/bin      u:\/bin/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 	sed -e "s/#sln e:\/etc      u:\/etc/sln c:\/mint\/$VER\/sys-root\/etc      u:\/etc/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 	sed -e "s/#sln e:\/opt      u:\/opt/sln c:\/mint\/$VER\/sys-root\/opt      u:\/opt/;" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
