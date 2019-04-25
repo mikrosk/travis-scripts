@@ -10,6 +10,7 @@ ARANYM_DIR="$4"
 TERADESK_DIR="$5"
 BASH_DIR="$6"
 COREUTILS_DIR="$7"
+QED_DIR="$8"
 
 HERE="$(dirname "$0")"
 . "$HERE/util.sh"
@@ -22,7 +23,7 @@ else
 fi
 MINTDIR="$ROOT/mint/$VER"
 XAAESDIR="$MINTDIR/xaaes"
-SYSROOT="$MINTDIR/sysroot"
+SYSROOT="$MINTDIR/sys-root"
 USBDIR="$MINTDIR/usb"
 TBLDIR="$MINTDIR/keyboard"
 FONTSDIR="$MINTDIR/fonts"
