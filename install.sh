@@ -3,8 +3,12 @@
 # -u: Treat unset variables as an error when substituting.
 # -x: Display expanded script commands
 
-LIBCMINI_URL=$(curl -s https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
-LIBCMINI_NAME=$(curl -s https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
+CURL_HEADER="Authorization: token $GITHUB_OATH_TOKEN"
+
+curl -s -H "$CURL_HEADER" -i https://api.github.com/users/mikrosk
+
+LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
+LIBCMINI_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
 
 cd ..
 mkdir libcmini
@@ -12,8 +16,8 @@ wget -q "$LIBCMINI_URL"
 tar xzvf "$LIBCMINI_NAME" -C libcmini
 cd -
 
-QED_URL=$(curl -s https://api.github.com/repos/freemint/freemint.github.io/contents/builds/qed/master | jq -r '.[].download_url')
-QED_NAME=$(curl -s https://api.github.com/repos/freemint/freemint.github.io/contents/builds/qed/master | jq -r '.[].name')
+QED_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/freemint.github.io/contents/builds/qed/master | jq -r '.[].download_url')
+QED_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/freemint.github.io/contents/builds/qed/master | jq -r '.[].name')
 
 cd .travis
 wget -q "$QED_URL"
