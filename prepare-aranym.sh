@@ -15,12 +15,7 @@ QED_DIR="$8"
 HERE="$(dirname "$0")"
 . "$HERE/util.sh"
 
-if [ -n "${VERSIONED+x}" ]
-then
-	ROOT="$DST/drive_c"
-else
-	ROOT="$DST"
-fi
+ROOT="$DST/drive_c"
 MINTDIR="$ROOT/mint/$VER"
 XAAESDIR="$MINTDIR/xaaes"
 SYSROOT="$MINTDIR/sys-root"
@@ -61,19 +56,16 @@ cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
 # filesystem
 ############
 
-if [ -n "${VERSIONED+x}" ]
-then
-	mkdir -p "$DST"
+mkdir -p "$DST"
 
-	cp -r "$ARANYM_DIR/emutos" "$DST"
-	cp -r "$ARANYM_DIR/config" "$DST"
-	cp -r "$ARANYM_DIR"/runme.* "$DST"
+cp -r "$ARANYM_DIR/emutos" "$DST"
+cp -r "$ARANYM_DIR/config" "$DST"
+cp -r "$ARANYM_DIR"/runme.* "$DST"
 
-	sed -e "s/^Bootstrap = mintara.prg/Bootstrap = drive_c\/mint\/$VER\/mintara.prg/;" "$DST/config" > "$DST/config.tmp" && mv "$DST/config.tmp" "$DST/config"
+sed -e "s/^Bootstrap = mintara.prg/Bootstrap = drive_c\/mint\/$VER\/mintara.prg/;" "$DST/config" > "$DST/config.tmp" && mv "$DST/config.tmp" "$DST/config"
 
-	mkdir -p "$ROOT"
-	cp -r "$ARANYM_DIR/fvdi"/* "$ROOT"
-	sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
+mkdir -p "$ROOT"
+cp -r "$ARANYM_DIR/fvdi"/* "$ROOT"
+sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 
-	create_filesystem
-fi
+create_filesystem
