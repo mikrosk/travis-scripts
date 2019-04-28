@@ -7,7 +7,7 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]
 then
 CURL_HEADER="Authorization: token $GITHUB_OATH_TOKEN"
 else
-# use an empty authorization header. this will fall back to 50 requests (for any project!) per hour from given Travis IP.
+# use an empty authorization header. this will fall back to 50 requests per hour from given Travis IP (for any project, not only ours!)
 CURL_HEADER=""
 fi
 
