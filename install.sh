@@ -3,7 +3,13 @@
 # -u: Treat unset variables as an error when substituting.
 # -x: Display expanded script commands
 
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ]
+then
 CURL_HEADER="Authorization: token $GITHUB_OATH_TOKEN"
+else
+# use an empty authorization header. this will fall back to 50 requests (for any project!) per hour from given Travis IP.
+CURL_HEADER=""
+fi
 
 LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
 LIBCMINI_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
