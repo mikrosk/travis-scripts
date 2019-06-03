@@ -351,7 +351,7 @@ copy_ehci_usb_modules() {
 copy_ct60_usb_modules() {
 	local USBDIR="$1"
 	mkdir -p "$USBDIR"
-	cp "$SRC/sys/usb/src.km/ucd/ethernat/ethernat.ucd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/ethernat/.compile_060/ethernat.ucd" "$USBDIR"
 }
 
 copy_aranym_usb_modules() {
@@ -367,6 +367,7 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_prg/unicorn.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg/netusbee.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg_000/netusbee.prg" "$USB4TOSDIR/netus000.prg"
+	cp "$SRC/sys/usb/src.km/ucd/ethernat/.compile_prg/ethernat.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/keyboard/.compile_prg/keyboard.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
