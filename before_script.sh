@@ -42,8 +42,8 @@ sed -i -e "s/xconout2targets = 02060 030 040 060 deb 000 col/xconout2targets = $
 sed -i -e "s/lptargets = 02060 030 040 060 deb 000 col/lptargets = ${CPU_TARGET}/;" ./sys/xdd/lp/LPDEFS
 sed -i -e "s/usbloadtargets = 000 02060 030 040 060 col/usbloadtargets = ${CPU_TARGET}/;" ./sys/usb/src.km/loader/USBLOADDEFS
 sed -i -e "s/ethtargets = 02060 030 040 060 deb 000 col prg/ethtargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/eth/ETHDEFS
-sed -i -e "s/keyboardtargets = 02060 030 040 060 deb 000 col prg/keyboardtargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/keyboard/KEYBOARDDEFS
-sed -i -e "s/mousetargets = 02060 030 040 060 deb 000 col prg/mousetargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/mouse/MOUSEDEFS
+sed -i -e "s/keyboardtargets = 02060 030 040 060 deb 000 col prg/keyboardtargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/hid/keyboard/KEYBOARDDEFS
+sed -i -e "s/mousetargets = 02060 030 040 060 deb 000 col prg/mousetargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/hid/mouse/MOUSEDEFS
 sed -i -e "s/printertargets = 02060 030 040 060 deb 000 col prg/printertargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/printer/PRINTERDEFS
 sed -i -e "s/storagetargets = 02060 030 040 060 deb 000 col prg/storagetargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/udd/storage/STORAGEDEFS
 sed -i -e "s/usbtargets = 02060 030 040 060 deb 000 col prg/usbtargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/USBDEFS

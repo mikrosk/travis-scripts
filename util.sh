@@ -327,8 +327,8 @@ copy_usb() {
 	mkdir -p "$USBDIR"
 	cp "$SRC/sys/usb/src.km/.compile_$TARGET"/*.km "$USBDIR/usb.km"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_$TARGET/eth.udd" "$USBDIR"
-	cp "$SRC/sys/usb/src.km/udd/keyboard/.compile_$TARGET/keyboard.udd" "$USBDIR"
-	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_$TARGET/mouse.udd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/keyboard/.compile_$TARGET/keyboard.udd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/mouse/.compile_$TARGET/mouse.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/printer/.compile_$TARGET/printer.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_$TARGET/storage.udd" "$USBDIR"
 }
@@ -369,8 +369,8 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg_000/netusbee.prg" "$USB4TOSDIR/netus000.prg"
 	cp "$SRC/sys/usb/src.km/ucd/ethernat/.compile_prg/ethernat.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
-	cp "$SRC/sys/usb/src.km/udd/keyboard/.compile_prg/keyboard.prg" "$USB4TOSDIR"
-	cp "$SRC/sys/usb/src.km/udd/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/keyboard/.compile_prg/keyboard.prg" "$USB4TOSDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/printer/.compile_prg/printer.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
 	# TODO: multiple CPU variants?
