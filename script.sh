@@ -31,7 +31,7 @@ then
 elif [ "$CPU_TARGET" = "prg" ]
 then
 	cd sys/usb && make && cd -
-	cd tools/usbtool && make && cd -
+	cd tools/usbtool && make all && cd -
 	DST="${TMP}/usb4tos-${SHORT_VERSION}"
 	"./.travis/prepare-usb4tos.sh" "${PWD}" "${DST}"
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
