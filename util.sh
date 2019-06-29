@@ -275,13 +275,13 @@ copy_xaaes() {
 	mkdir -p "$XAAESDIR"
 	if [ "$TARGET" = "col" ]
 	then
-	cp "$SRC/xaaes/src.km/xaaesv4e.km" "$XAAESDIR/xaaes.km"
+	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaesv4e.km" "$XAAESDIR/xaaes.km"
 	elif [ "$TARGET" = "000" ]
 	then
-	cp "$SRC/xaaes/src.km/xaaesst.km" "$XAAESDIR/xaaesst.km"
-	cp "$SRC/xaaes/src.km/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
+	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaesst.km" "$XAAESDIR/xaaesst.km"
+	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
 	else
-	cp "$SRC/xaaes/src.km/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
+	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
 	fi
 	cp "$SRC/xaaes/src.km/adi/whlmoose/.compile_$TARGET/moose.adi" "$XAAESDIR"
 	cp "$SRC/xaaes/src.km/adi/whlmoose/.compile_$TARGET/moose_w.adi" "$XAAESDIR"
