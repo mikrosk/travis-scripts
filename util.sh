@@ -278,7 +278,7 @@ copy_xaaes() {
 	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaesv4e.km" "$XAAESDIR/xaaes.km"
 	elif [ "$TARGET" = "000" ]
 	then
-	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaesst.km" "$XAAESDIR/xaaesst.km"
+	cp "$SRC/xaaes/src.km/.compile_sto/xaaesst.km" "$XAAESDIR/xaaesst.km"
 	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
 	else
 	cp "$SRC/xaaes/src.km/.compile_$TARGET/xaaes$TARGET.km" "$XAAESDIR/xaaes.km"
