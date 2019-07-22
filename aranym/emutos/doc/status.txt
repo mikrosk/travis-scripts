@@ -1,44 +1,52 @@
 This file documents the status of the individual parts of EmuTOS.
 
-Here is a quick list of supported emulators/hardware:
+Supported emulators/hardware
+============================
 This table should be updated regularly. When indicating failure,
-if possible add a line telling in which version it did run.
+if possible add a line showing which version ran OK.
 Unless otherwise specified in 'details', systems were tested using
 a ROM version of EmuTOS.
 
   system              |  ok?  | who |   date      |  details
   --------------------+-------+-----+-------------+----------------
   Emulators           |       |     |             |
-  ARAnyM 1.0.2        |  yes  | VRI | 17 Dec 2018 |
-  Hatari v2.1.0       |  yes  | VRI | 16 Dec 2018 |
+  ARAnyM 0.9.16       |  yes  | VRI |  1 Jun 2019 |
+  Hatari v2.2.1       |  yes  | VRI |  2 Jun 2019 |
   Pacifist v0.48      |  yes  | LVL | winter 2001 |
   SainT v2.40         |  yes  | (1) | 10 Dec 2017 | 192k ROM only
-  STeem SSE 3.9.4     |  yes  | VRI | 16 Dec 2018 |
+  STeem SSE 3.9.4     |  yes  | VRI |  2 Jun 2019 |
   STonC v0.8.1        |  yes  | LVL |  9 Feb 2003 |
   STonX 0.6.7.6       |  yes  | THH | 14 Nov 2008 |
   TOSBox 1.10a        |   no  |  ?  |  < Sep 2002 |
   WinSTon V0.1r2      |   no  |  ?  |  < Sep 2002 |
-  WinUAE 4.1.0        |  yes  | VRI | 19 Dec 2018 |
+  WinUAE 4.2.0        |  yes  | VRI |  2 Jun 2019 |
   --------------------+-------+-----+-------------+----------------
   Atari & compatibles |       |     |             |
-  STfm                |  yes  | (1) | 23 Nov 2017 |
+  STf & STfm          |  yes  | (1) | 21 May 2019 |
   Mega ST             |  yes  | (8) |  7 Dec 2018 | tested with PRG
-  STe                 |  yes  | (1) | 23 Nov 2017 |
-  Mega STe            |  yes  | (2) | 26 Jun 2004 | only RAMTOS tested
-  TT030               |  yes  | RFB | 30 Nov 2018 | tested with PRG
+  STe                 |  yes  | (1) | 21 May 2019 |
+  Mega STe            |  yes  | (1) | 21 May 2019 | tested with PRG
+  TT030               |  yes  | (1) | 21 May 2019 |
   Falcon030           |  yes  | (7) | 31 Dec 2016 |
-  Falcon030           |  yes  | RFB | 29 Nov 2018 | tested with PRG
-  Falcon030 + CT60    |  yes  | RFB | 29 Nov 2018 | tested with PRG
+  Falcon030           |  yes  | RFB | 26 May 2019 | tested with PRG
+  Falcon030 + CT60    |  yes  | RFB | 26 May 2019 | tested with PRG
   Suska III-C (2K15B) |  yes  | (5) | 23 Apr 2016 |
   --------------------+-------+-----+-------------+----------------
   Other systems       |       |     |             |
   Amiga Blizzard 1260 |  yes  | (3) |    Aug 2012 | tested with BlizKick
-  Amiga 500 + Vampire |  yes  | VRI | 21 Dec 2018 |
+  Amiga 500 + Vampire |  yes  | VRI |  5 Jun 2019 |
   Amiga 600 + Vampire |  yes  | (6) |    Mar 2017 |
   Amiga 1000          |  yes  | (4) |    Jul 2012 |
-  FireBee             |  yes  | VRI | 18 Dec 2018 |
-  M5484LITE           |  yes  | VRI | 18 Dec 2018 |
+  FireBee             |  yes  | RFB |  3 Jun 2019 |
+  M5484LITE           |  yes  | VRI |  3 Jun 2019 |
 
+Abbreviations for testers:
+    LVL: Laurent Vogel
+    RFB: Roger Burrows
+    THH: Thomas Huth
+    VRI: Vincent Rivière
+
+Other testers:
   (1) reported by Christian Zietz
   (2) reported to LVL by Frédéric Pécourt
   (3) reported by Michaël Gibs
@@ -48,14 +56,16 @@ a ROM version of EmuTOS.
   (7) reported by Stefan Niestegge
   (8) reported by Claude Labelle
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Implemented functions
+=====================
 Now let's talk about the different subsystems, and what is implemented.
 NOTE: the information in the following table may be somewhat dated.  For
 example, most GEMDOS/BIOS/XBIOS functions are known to work without
 problems.
 
-
 This is what the first field of the following table means:
-
 ? status unknown
 - Not yet implemented
 > Partially implemented
@@ -330,10 +340,13 @@ All GEMDOS versions:
  T 0x56 Frename
  T 0x57 Fdatime
 
-GEMDOS v0.19 (TOS v2):
+GEMDOS v0.19 (TOS v2/v3):
  T 0x14 Maddalt
  T 0x44 Mxalloc
  (and Pexec mode 6)
+
+GEMDOS v0.30 (TOS v4):
+ > 0x15 Srealloc (undocumented by Atari)
 
 
  Line-A functions
