@@ -554,4 +554,18 @@ create_filesystem() {
 
 	cp -r "$TERADESK_DIR" "$SYSROOT/opt/GEM"
 	cp -r "$QED_DIR" "$SYSROOT/opt/GEM"
+	
+	if [ "$CPU_TARGET" = "000" ]
+	then
+		rm "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qed02060.app" "$QED_DIR/qedcol.app"
+		mv "$QED_DIR/qed000.app" "$QED_DIR/qed.app"
+	elif [ "$CPU_TARGET" = "col" ]
+	then
+		rm "$QED_DIR/qed000.app" "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qed02060.app"
+		mv "$QED_DIR/qedcol.app" "$QED_DIR/qed.app"
+	else
+		# 02060, 030, 040, 060
+		rm "$QED_DIR/qed000.app" "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qedcol.app"
+		mv "$QED_DIR/qed02060.app" "$QED_DIR/qed.app"
+	fi
 }
