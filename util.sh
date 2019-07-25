@@ -553,7 +553,6 @@ create_filesystem() {
 	touch "$SYSROOT/var/run/utmp"
 
 	cp -r "$TERADESK_DIR" "$SYSROOT/opt/GEM"
-	cp -r "$QED_DIR" "$SYSROOT/opt/GEM"
 	
 	if [ "$CPU_TARGET" = "000" ]
 	then
@@ -568,4 +567,5 @@ create_filesystem() {
 		rm "$QED_DIR/qed000.app" "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qedcol.app"
 		mv "$QED_DIR/qed02060.app" "$QED_DIR/qed.app"
 	fi
+	cp -r "$QED_DIR" "$SYSROOT/opt/GEM"
 }
