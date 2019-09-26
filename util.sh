@@ -329,6 +329,7 @@ copy_usb() {
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_$TARGET/eth.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/hid/keyboard/.compile_$TARGET/keyboard.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/hid/mouse/.compile_$TARGET/mouse.udd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/tablet/.compile_$TARGET/tablet.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/printer/.compile_$TARGET/printer.udd" "$USBDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_$TARGET/storage.udd" "$USBDIR"
 }
@@ -371,6 +372,7 @@ copy_usb4tos() {
 	cp "$SRC/sys/usb/src.km/udd/eth/.compile_prg/eth.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/hid/keyboard/.compile_prg/keyboard.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/hid/mouse/.compile_prg/mouse.prg" "$USB4TOSDIR"
+	cp "$SRC/sys/usb/src.km/udd/hid/tablet/.compile_prg/tablet.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/printer/.compile_prg/printer.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/udd/storage/.compile_prg/storage.prg" "$USB4TOSDIR"
 	# TODO: multiple CPU variants?
