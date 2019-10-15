@@ -10,35 +10,36 @@ a ROM version of EmuTOS.
   system              |  ok?  | who |   date      |  details
   --------------------+-------+-----+-------------+----------------
   Emulators           |       |     |             |
-  ARAnyM 0.9.16       |  yes  | VRI |  1 Jun 2019 |
-  Hatari v2.2.1       |  yes  | VRI |  2 Jun 2019 |
+  ARAnyM 0.9.16       |  yes  | VRI | 13 Oct 2019 |
+  Hatari v2.2.1       |  yes  | VRI | 10 Oct 2019 |
   Pacifist v0.48      |  yes  | LVL | winter 2001 |
   SainT v2.40         |  yes  | (1) | 10 Dec 2017 | 192k ROM only
-  STeem SSE 3.9.4     |  yes  | VRI |  2 Jun 2019 |
+  STeem SSE 3.9.4     |  yes  | VRI | 10 Oct 2019 |
   STonC v0.8.1        |  yes  | LVL |  9 Feb 2003 |
   STonX 0.6.7.6       |  yes  | THH | 14 Nov 2008 |
   TOSBox 1.10a        |   no  |  ?  |  < Sep 2002 |
   WinSTon V0.1r2      |   no  |  ?  |  < Sep 2002 |
-  WinUAE 4.2.0        |  yes  | VRI |  2 Jun 2019 |
+  WinUAE 4.2.1        |  yes  | VRI | 13 Oct 2019 |
   --------------------+-------+-----+-------------+----------------
   Atari & compatibles |       |     |             |
-  STf & STfm          |  yes  | (1) | 21 May 2019 |
+  STf & STfm          |  yes  | (1) | 24 Sep 2019 |
   Mega ST             |  yes  | (8) |  7 Dec 2018 | tested with PRG
-  STe                 |  yes  | (1) | 21 May 2019 |
+  STe                 |  yes  | (1) | 30 Sep 2019 |
   Mega STe            |  yes  | (1) | 21 May 2019 | tested with PRG
-  TT030               |  yes  | (1) | 21 May 2019 |
+  TT030               |  yes  | (1) | 24 Sep 2019 |
   Falcon030           |  yes  | (7) | 31 Dec 2016 |
-  Falcon030           |  yes  | RFB | 26 May 2019 | tested with PRG
-  Falcon030 + CT60    |  yes  | RFB | 26 May 2019 | tested with PRG
+  Falcon030           |  yes  | RFB | 29 Sep 2019 | tested with PRG
+  Falcon030 + CT60    |  yes  | RFB | 29 Sep 2019 | tested with PRG
   Suska III-C (2K15B) |  yes  | (5) | 23 Apr 2016 |
   --------------------+-------+-----+-------------+----------------
   Other systems       |       |     |             |
   Amiga Blizzard 1260 |  yes  | (3) |    Aug 2012 | tested with BlizKick
-  Amiga 500 + Vampire |  yes  | VRI |  5 Jun 2019 |
+  Amiga 500 + Vampire |  yes  | VRI | 13 Oct 2019 | GOLD2.11
   Amiga 600 + Vampire |  yes  | (6) |    Mar 2017 |
   Amiga 1000          |  yes  | (4) |    Jul 2012 |
-  FireBee             |  yes  | RFB |  3 Jun 2019 |
-  M5484LITE           |  yes  | VRI |  3 Jun 2019 |
+  FireBee             |  yes  | VRI | 13 Oct 2019 |
+  M5484LITE           |  yes  | VRI | 13 Oct 2019 |
+  Vampire V4          |  yes  | (1) | 24 Sep 2019 |
 
 Abbreviations for testers:
     LVL: Laurent Vogel
@@ -77,8 +78,8 @@ T tested and working on an emulator or real hardware
  Hardware initialization
  ----------------------------------------------------------------------------
 
- T CPU setting, tested on: 68000 (real & emu), 68030 (real & emu), 68040 (emu),
-   68060 (real), 68080 (real), V4e (real)
+ T CPU setting, tested on: 68000 (real & emu), 68010 (real), 68020 (real),
+   68030 (real & emu), 68040 (emu), 68060 (real), 68080 (real), V4e (real)
  T FPU
  T 68030 MMU and cache initialization
  T Memory controller (both ST and Falcon)
@@ -193,7 +194,7 @@ All XBIOS versions:
  T 0x11 Random
  T 0x12 Protobt
  T 0x13 Flopver
- - 0x14 Scrdmp
+ T 0x14 Scrdmp          (unlike TOS, the default dump routine does nothing)
  T 0x15 Cursconf
  T 0x16 Settime
  T 0x17 Gettime
@@ -206,7 +207,7 @@ All XBIOS versions:
  T 0x1e Ongibit
  T 0x1f Xbtimer
  T 0x20 Dosound
- - 0x21 Setprt          (useless - will not be implemented)
+ T 0x21 Setprt
  X 0x22 Kbdvbase
  T 0x23 Kbrate
  - 0x24 Prtblk          (useless - will not be implemented)

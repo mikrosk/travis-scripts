@@ -1,29 +1,32 @@
 A brief user's guide to the newer features of EmuDesk, the EmuTOS desktop
 =========================================================================
 
-The current version of EmuDesk is based on the TOS 1 desktop, but with
-many improvements inspired by the TOS 2/3/4 desktop, including:
+The current version of EmuDesk implements all of the features of the
+Atari TOS 1 desktop, plus most of the features of the TOS 2/3/4 desktop,
+including:
 
-1) new menu items
+1) menu items
     . set file mask
     . install icon
     . install application
     . install devices
     . remove desktop icon
     . desktop configuration
+    . read .inf file
     . blitter
 Due to space limitations, the implementation of the above is somewhat
 restricted in the 192K ROMs (see the detailed descriptions below).  If
 you make any changes to the desktop using the above features, you must
 save the desktop to preserve the changes.
 
-2) other new features
+2) other features
     . user-assignable icons
     . user-assignable mouse cursors
     . open disk window via keyboard shortcut
     . desktop shortcuts
-Due to space limitations, desktop shortcuts are not available in the
-192K ROMs.  Desktop shortcuts are preserved when you save the desktop.
+    . desktop printer support
+Due to space limitations, desktop shortcuts & desktop printer support
+are not available in the 192K ROMs.
 
 
 Set file mask
@@ -78,7 +81,9 @@ all .TXT files with a text editor; then, double-clicking on a .TXT file
 would automatically launch the editor.
 
 In addition, you can assign a function key to an application; pressing
-the function key at the desktop will then launch the application.
+the function key at the desktop will then launch the application.  Note
+that a list of all currently-assigned function keys is available via the
+"Desktop configuration..." menu item (see "Desktop configuration" below).
 
 Finally, you can set "autoboot" for one application (only): this will
 launch that application during system initialisation, immediately before
@@ -180,10 +185,33 @@ This is not available.
 
 Other ROMs:
 This is a simplified version of the corresponding Atari TOS menu item.
-It allows you to specify the default directory and input parameter for
-all applications that are not installed applications.  See "Install
-application" above, under 'Default dir' and 'Parameter', for further
-information about these options.
+You may do the following:
+. specify the default directory and input parameter for all applications
+  that are not installed applications.  See "Install application" above,
+  under 'Default dir' and 'Parameter', for further information.
+. display the function keys (and corresponding programs) that have been
+  assigned via the "Install application..." menu item.  To display, use
+  the arrows: up/down arrows select the previous/next assigned function
+  key (in key number sequence), and left/right arrows scroll along the
+  full pathname of the program.
+This dialog also displays the current free memory (more accurately, the
+size of the largest free memory area) in KB (1KB = 1024 bytes).  For
+systems with alternate RAM, two numbers are displayed: the first is for
+ST RAM, the second is for alternate RAM.
+
+
+Read .INF file
+==============
+192K ROMs:
+This is not available.
+
+Other ROMs:
+This item allows you to read in an EmuDesk .INF file 'on the fly'.
+After the file has been read in, the desktop is restarted immediately,
+a very fast process.  After the restart, the desktop layout and
+preferences will be set up according to the contents of the new .INF
+file, except that the video resolution specified is ignored (this is
+the same behaviour as Atari TOS).
 
 
 Blitter
@@ -233,11 +261,12 @@ putting too many icons in EMUICON.RSC.
 
 User-assignable mouse cursors
 =============================
-When the AES starts, it looks for a file called EMUCURS.RSC in the root
-of the boot drive.  This file should be a standard Atari resource file,
-containing 8 ICONBLKs; each ICONBLK is a container for a mouse cursor.
-If the file is found, these cursors are used instead of the builtin
-cursors.  The usage is as described for the AES graf_mouse() call:
+When the AES starts up, it looks for an optional file called EMUCURS.RSC
+in the root directory of the boot drive.  This file should be a standard
+Atari resource file, containing 8 ICONBLKs; each ICONBLK is a container
+for a mouse cursor.  If the file is found, these cursors are used instead
+of the builtin cursors.  The usage is as described for the AES graf_mouse()
+call:
     0   arrow
     1   text cursor / i-beam
     2   busy bee / hourglass
@@ -247,9 +276,9 @@ cursors.  The usage is as described for the AES graf_mouse() call:
     6   thick cross
     7   outline cross
 
-A default EMUCURS.RSC file is shipped with the release; the mouse cursors
-in it are the same as the builtin ones.  Also shipped is the corresponding
-EMUCURS.DEF file for use by a resource editor.
+A sample EMUCURS.RSC file is shipped with the release in the EXTRAS folder;
+the mouse cursors in it are the same as the builtin ones.  Also shipped
+is the corresponding EMUCURS.DEF file for use by a resource editor.
 
 NOTE: Because the mouse cursors are not really ICONBLKs (though they are
 stored as such within the resource), editing them with a standard resource
@@ -302,3 +331,16 @@ the shortcut, locating the desired file or folder, or cancelling the
 action.  If you choose locate, a file selector will be displayed to
 allow you to choose the desired file or folder, and the shortcut will be
 updated with the new information.
+
+
+Desktop printer support
+=======================
+You may now install a printer icon on the desktop (if you do not already
+have an EMUDESK.INF file, this icon will be installed automatically).
+Dropping one or more files on the icon will cause the contents to be
+output via the parallel or serial port; a form feed will be sent at the
+end of each file.
+
+By default, the output will go to the parallel port; you may select the
+serial port instead by using any CPX, accessory, or program that allows
+you to do the same thing under Atari TOS.
