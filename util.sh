@@ -67,6 +67,10 @@ copy_modules() {
 	cp "$SRC/sys/xfs/minixfs/README" "$MINTDIR/doc/minix.txt"
 	cp "$SRC/sys/xfs/nfs/.compile_$TARGET/nfs.xfs" "$MINTDIR"
 	cp "$SRC/sys/xfs/nfs/README" "$MINTDIR/doc/nfs.txt"
+	mkdir -p "$MINTDIR/doc/xaaes"
+	for i in themes.txt usrguide.txt xa_lang_notes.txt xaaes.html xaaes.hyp xaaes.ref xaaes.txt; do
+		cp -a "$SRC/doc/xaaes/$i" "$MINTDIR/doc/xaaes"
+	done
 }
 
 # modules compatible with all m68k machines (except the FireBee...)
