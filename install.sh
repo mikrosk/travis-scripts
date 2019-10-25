@@ -28,3 +28,7 @@ wget -q "$QED_URL"
 unzip "$QED_NAME"
 rm "$QED_NAME"
 cd -
+
+if test -f .travis/install-udo.sh; then
+	. .travis/install-udo.sh
+fi

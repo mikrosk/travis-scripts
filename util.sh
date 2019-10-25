@@ -449,7 +449,6 @@ copy_sysroot() {
 	mkdir -p "$SYSROOT/opt/GEM/toswin2"
 	cp "$SRC/tools/toswin2/.compile_$TARGET/toswin2.app" "$SYSROOT/opt/GEM/toswin2"
 	cp "$SRC/tools/toswin2/tw-call/.compile_$TARGET/tw-call.app" "$SYSROOT/opt/GEM/toswin2"
-	# TODO: 'doc' need to be compiled as a HYP
 	cp -r "$SRC/tools/toswin2/doc" "$SYSROOT/opt/GEM/toswin2"
 	cp "$SRC/tools/toswin2/english/toswin2.rsc" "$SYSROOT/opt/GEM/toswin2"
 	cp -r "$SRC/tools/toswin2/screenshots" "$SYSROOT/opt/GEM/toswin2"
