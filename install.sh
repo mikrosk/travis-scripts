@@ -29,6 +29,27 @@ unzip "$QED_NAME"
 rm "$QED_NAME"
 cd -
 
+if [ "$CPU_TARGET" = "000" ]
+then
+	DOSFSTOOLS_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].browser_download_url' | grep 'm68000')
+	DOSFSTOOLS_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].name' | grep 'm68000')
+elif [ "$CPU_TARGET" = "col" ]
+then
+	DOSFSTOOLS_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].browser_download_url' | grep '5475')
+	DOSFSTOOLS_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].name' | grep '5475')
+else
+	# 02060, 030, 040, 060
+	DOSFSTOOLS_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].browser_download_url' | grep 'm68020-60')
+	DOSFSTOOLS_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].name' | grep 'm68020-60')
+fi
+
+cd .travis
+mkdir dosfstools
+wget -q "$DOSFSTOOLS_URL"
+tar xjvf "$DOSFSTOOLS_NAME" -C dosfstools
+rm "$DOSFSTOOLS_NAME"
+cd -
+
 mkdir -p ~/"tmp/udo"
 cd ~/"tmp/udo"
 wget "http://www.tho-otto.de/download/udo-7.12-linux.tar.bz2"

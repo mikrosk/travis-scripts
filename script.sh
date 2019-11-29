@@ -16,6 +16,7 @@ TERADESK="${PWD}/.travis/teradesk"
 BASH="${PWD}/.travis/bash"
 COREUTILS="${PWD}/.travis/coreutils"
 QED="${PWD}/.travis/qed"
+DOSFSTOOLS="${PWD}/.travis/dosfstools"
 TMP="${PWD}/.travis/.tmp"
 OUT="${PWD}/.travis"
 
@@ -25,7 +26,7 @@ if [ "$CPU_TARGET" = "ara" ]
 then
 	make
 	DST="${TMP}/aranym-${SHORT_VERSION}"
-	"./.travis/prepare-aranym.sh" "${PWD}" "${DST}" "${SHORT_VERSION}" "${ARANYM}" "${TERADESK}" "${BASH}" "${COREUTILS}" "${QED}"
+	"./.travis/prepare-aranym.sh" "${PWD}" "${DST}" "${SHORT_VERSION}" "${ARANYM}" "${TERADESK}" "${BASH}" "${COREUTILS}" "${QED}" "${DOSFSTOOLS}"
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
 	cd "${DST}/.." && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-040${VERSIONED}.zip" "$(basename ${DST})" && cd -
 elif [ "$CPU_TARGET" = "prg" ]
@@ -39,7 +40,7 @@ then
 else
 	make
 	DST="${TMP}/mint-${SHORT_VERSION}-${CPU_TARGET}"
-	"./.travis/prepare-snapshot.sh" "${PWD}" "${DST}" "${SHORT_VERSION}" "${SHORT_ID}" "${TERADESK}" "${BASH}" "${COREUTILS}" "${QED}"
+	"./.travis/prepare-snapshot.sh" "${PWD}" "${DST}" "${SHORT_VERSION}" "${SHORT_ID}" "${TERADESK}" "${BASH}" "${COREUTILS}" "${QED}" "${DOSFSTOOLS}"
 	find "${DST}" -type f -perm -a=x -exec m68k-atari-mint-strip -s {} \;
 	cd "${DST}" && zip -r -9 "${OUT}/${PROJECT}-${SHORT_VERSION}-${CPU_TARGET}${VERSIONED}.zip" * && cd -
 fi

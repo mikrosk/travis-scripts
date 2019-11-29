@@ -11,6 +11,7 @@ TERADESK_DIR="$5"
 BASH_DIR="$6"
 COREUTILS_DIR="$7"
 QED_DIR="$8"
+DOSFSTOOLS_DIR="$9"
 
 HERE="$(dirname "$0")"
 . "$HERE/util.sh"

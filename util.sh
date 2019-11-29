@@ -573,4 +573,7 @@ create_filesystem() {
 		mv "$QED_DIR/qed02060.app" "$QED_DIR/qed.app"
 	fi
 	cp -r "$QED_DIR" "$SYSROOT/opt/GEM"
+	
+	cp "$DOSFSTOOLS_DIR/sbin/fsck.fat" "$SYSROOT/bin"
+	cp "$DOSFSTOOLS_DIR/sbin/fatlabel" "$SYSROOT/bin"
 }
