@@ -117,10 +117,10 @@ copy_megast_modules() {
 	mkdir -p "$MCHDIR"
 	mkdir -p "$MCHDIR/doc"
 	cp "$SRC/sys/sockets/xif/lance.xif" "$MCHDIR/lance.xix"
-	cp "$SRC/sys/sockets/xif/rieblmst.xif" "$MCHDIR/rieblmst.xix"
-	cp "$SRC/sys/sockets/xif/rieblmst_fast.xif" "$MCHDIR/rieblmst_fast.xix"
+	cp "$SRC/sys/sockets/xif/rieblmst.xif" "$MCHDIR/riebl.xix"
+	cp "$SRC/sys/sockets/xif/rieblmst_fast.xif" "$MCHDIR/riebl_fast.xix"
 	cp "$SRC/sys/sockets/xif/rieblspc.xif" "$MCHDIR/rieblspc.xix"
-	cp "$SRC/sys/sockets/xif/rieblspc_fast.xif" "$MCHDIR/rieblspc_fast.xix"
+	cp "$SRC/sys/sockets/xif/rieblspc_fast.xif" "$MCHDIR/riebls_fast.xix"
 	cp "$SRC/sys/sockets/xif/LANCE.txt" "$MCHDIR/doc/riebl.txt"
 	cp "$SRC/sys/sockets/xif/rtl8012st.xif" "$MCHDIR/rtl8012st.xix"
 	cp "$SRC/sys/xdd/mfp/mfp.xdd" "$MCHDIR"
@@ -387,6 +387,10 @@ copy_fonts() {
 	local FONTSDIR="$1"
 	mkdir -p "$FONTSDIR"
 	cp -r "$SRC/fonts"/* "$FONTSDIR"
+	# patch long file names
+	mv "$FONTSDIR/cs/cp1250_08.txt" "$FONTSDIR/cs/cp125008.txt"
+	mv "$FONTSDIR/cs/cp1250_09.txt" "$FONTSDIR/cs/cp125009.txt"
+	mv "$FONTSDIR/cs/cp1250_10.txt" "$FONTSDIR/cs/cp125010.txt"
 }
 
 copy_tbl() {
