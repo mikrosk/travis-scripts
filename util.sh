@@ -408,6 +408,7 @@ copy_sysroot() {
 	cp "$SRC/tools/cops/.compile_english_$TARGET/cops.app" "$SYSROOT/opt/GEM/cops"
 	cp "$SRC/tools/cops/.compile_german_$TARGET/cops_de.app" "$SYSROOT/opt/GEM/cops"
 	cp "$SRC/tools/cops/.compile_france_$TARGET/cops_fr.app" "$SYSROOT/opt/GEM/cops"
+	cp "$SRC/tools/cops/copsicn.rsc" "$SYSROOT/opt/GEM/cops"
 
 	mkdir -p "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/.compile_$TARGET/fsetter.app" "$SYSROOT/opt/GEM/fsetter"
