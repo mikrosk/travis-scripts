@@ -25,11 +25,6 @@ then
 	CPU_TARGET="040"
 fi
 
-if [ -n "$CPU_TARGET" ]
-then
-	COPS_TARGETS="english_${CPU_TARGET} france_${CPU_TARGET} german_${CPU_TARGET}"
-fi
-
 # limit building to selected CPU targets
 sed -i -e "s/xaloadtargets = 000 02060 030 040 060 col/xaloadtargets = ${CPU_TARGET}/;" ./xaaes/src.km/xaloader/XALOADDEFS
 sed -i -e "s/xaaestargets = deb 000 sto 030 040 060 col 02060/xaaestargets = ${XAAES_TARGETS}/;" ./xaaes/src.km/XAAESDEFS
@@ -52,7 +47,7 @@ sed -i -e "s/netusbeetargets = 02060 030 040 060 deb 000 prg prg_000 #col/netusb
 sed -i -e "s/unicorntargets = 02060 030 040 060 deb 000 col prg/unicorntargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/ucd/unicorn/UNICORNDEFS
 sed -i -e "s/inet4targets = 02060 030 040 060 deb 000 col/inet4targets = ${CPU_TARGET}/;" ./sys/sockets/INET4DEFS
 sed -i -e "s/inet4targets = 02060 030 040 060 deb 000 col/inet4targets = ${CPU_TARGET}/;" ./sys/sockets/inet4/INET4DEFS
-sed -i -e "s/copstargets = english_000 france_000 german_000 english_02060 france_02060 german_02060 english_030 france_030 german_030 english_040 france_040 german_040 english_060 france_060 german_060 english_col france_col german_col/copstargets = ${COPS_TARGETS}/;" ./tools/cops/COPSDEFS
+sed -i -e "s/copstargets = 000 02060 030 040 060 col/copstargets = ${CPU_TARGET}/;" ./tools/cops/COPSDEFS
 sed -i -e "s/cryptotargets = 000 02060 030 040 060 col/cryptotargets = ${CPU_TARGET}/;" ./tools/crypto/CRYPTODEFS
 sed -i -e "s/fdisktargets = 000 02060 030 040 060 col/fdisktargets = ${CPU_TARGET}/;" ./tools/fdisk/FDISKDEFS
 sed -i -e "s/fsettertargets = 000 02060 030 040 060 col/fsettertargets = ${CPU_TARGET}/;" ./tools/fsetter/FSETTERDEFS
