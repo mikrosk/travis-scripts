@@ -47,16 +47,10 @@ sed -i -e "s/netusbeetargets = 02060 030 040 060 deb 000 prg prg_000 #col/netusb
 sed -i -e "s/unicorntargets = 02060 030 040 060 deb 000 col prg/unicorntargets = ${CPU_TARGET}${PRG_TARGET}/;" ./sys/usb/src.km/ucd/unicorn/UNICORNDEFS
 sed -i -e "s/inet4targets = 02060 030 040 060 deb 000 col/inet4targets = ${CPU_TARGET}/;" ./sys/sockets/INET4DEFS
 sed -i -e "s/inet4targets = 02060 030 040 060 deb 000 col/inet4targets = ${CPU_TARGET}/;" ./sys/sockets/inet4/INET4DEFS
-sed -i -e "s/copstargets = 000 02060 030 040 060 col/copstargets = ${CPU_TARGET}/;" ./tools/cops/COPSDEFS
 sed -i -e "s/cryptotargets = 000 02060 030 040 060 col/cryptotargets = ${CPU_TARGET}/;" ./tools/crypto/CRYPTODEFS
 sed -i -e "s/fdisktargets = 000 02060 030 040 060 col/fdisktargets = ${CPU_TARGET}/;" ./tools/fdisk/FDISKDEFS
 sed -i -e "s/fsettertargets = 000 02060 030 040 060 col/fsettertargets = ${CPU_TARGET}/;" ./tools/fsetter/FSETTERDEFS
 sed -i -e "s/gluestiktargets = 000 02060 030 040 060 col/gluestiktargets = ${CPU_TARGET}/;" ./tools/gluestik/GLUESTIKDEFS
-sed -i -e "s/hypviewtargets = 000 02060 030 040 060 col/hypviewtargets = ${CPU_TARGET}/;" ./tools/hypview/HYPVIEWDEFS
-sed -i -e "s/bubbletargets = 000 02060 030 040 060 col/bubbletargets = ${CPU_TARGET}/;" ./tools/hypview/bubble/BUBBLEDEFS
-sed -i -e "s/dragdroptargets = 000 02060 030 040 060 col/dragdroptargets = ${CPU_TARGET}/;" ./tools/hypview/dragdrop/DRAGDROPDEFS
-sed -i -e "s/hyptargets = 000 02060 030 040 060 col/hyptargets = ${CPU_TARGET}/;" ./tools/hypview/hyp/HYPDEFS
-sed -i -e "s/plaintargets = 000 02060 030 040 060 col/plaintargets = ${CPU_TARGET}/;" ./tools/hypview/plain/PLAINDEFS
 sed -i -e "s/iotargets = 000 02060 030 040 060 col/iotargets = ${CPU_TARGET}/;" ./tools/IO/IODEFS
 sed -i -e "s/lpflushtargets = 000 02060 030 040 060 col/lpflushtargets = ${CPU_TARGET}/;" ./tools/lpflush/LPFLUSHDEFS
 sed -i -e "s/mgwtargets = 000 02060 030 040 060 col/mgwtargets = ${CPU_TARGET}/;" ./tools/mgw/MGWDEFS
@@ -74,6 +68,4 @@ sed -i -e "s/nohog2targets = 000 02060 030 040 060 col/nohog2targets = ${CPU_TAR
 sed -i -e "s/stracetargets = 000 02060 030 040 060 col/stracetargets = ${CPU_TARGET}/;" ./tools/strace/STRACEDEFS
 sed -i -e "s/swkbdtbltargets = 000 02060 030 040 060 col/swkbdtbltargets = ${CPU_TARGET}/;" ./tools/swkbdtbl/SWKBDTBLDEFS
 sed -i -e "s/sysctltargets = 000 02060 030 040 060 col/sysctltargets = ${CPU_TARGET}/;" ./tools/sysctl/SYSCTLDEFS
-sed -i -e "s/toswin2targets = 000 02060 030 040 060 col/toswin2targets = ${CPU_TARGET}/;" ./tools/toswin2/TOSWIN2DEFS
-sed -i -e "s/twcalltargets = 000 02060 030 040 060 col/twcalltargets = ${CPU_TARGET}/;" ./tools/toswin2/tw-call/TWCALLDEFS
 sed -i -e "s/usbtooltargets = 000 02060 030 040 060 col/usbtooltargets = ${CPU_TARGET}${USB_TOOL_TARGET}/;" ./tools/usbtool/USBTOOLDEFS
