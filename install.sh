@@ -11,8 +11,8 @@ else
 CURL_HEADER=""
 fi
 
-LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
-LIBCMINI_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/mfro0/libcmini/releases/latest | jq -r '.assets[].name')
+LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
+LIBCMINI_NAME=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/libcmini/releases/latest | jq -r '.assets[].name')
 
 cd ..
 mkdir libcmini
