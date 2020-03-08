@@ -17,6 +17,7 @@ HERE="$(dirname "$0")"
 . "$HERE/util.sh"
 . "$HERE/kernel_targets.sh"
 
+GUIDESDIR="$DST/guides"
 AUTODIR="$DST/auto"
 MINTDIR="$DST/mint/$VER"
 XAAESDIR="$MINTDIR/xaaes"
@@ -117,6 +118,9 @@ copy_fonts "$FONTSDIR"
 copy_tbl "$TBLDIR"
 
 copy_sysroot "$SYSROOT" "$CPU_TARGET"
+
+copy_guides "$GUIDESDIR"
+
 # Atari hardware only
 mkdir -p "$SYSROOT/bin"
 if [ "$CPU_TARGET" != "col" ]

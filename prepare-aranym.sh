@@ -17,6 +17,7 @@ HERE="$(dirname "$0")"
 . "$HERE/util.sh"
 
 ROOT="$DST/drive_c"
+GUIDESDIR="$ROOT/guides"
 MINTDIR="$ROOT/mint/$VER"
 XAAESDIR="$MINTDIR/xaaes"
 SYSROOT="$MINTDIR/sys-root"
@@ -50,6 +51,9 @@ copy_fonts "$FONTSDIR"
 copy_tbl "$TBLDIR"
 
 copy_sysroot "$SYSROOT" "040"
+
+copy_guides "$GUIDESDIR"
+
 mkdir -p "$SYSROOT/bin"
 cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
 
