@@ -534,6 +534,7 @@ copy_guides() {
 	local GUIDESDIR="$1"
 	mkdir -p "$GUIDESDIR"
 	cp "$SRC/doc/xaaes/xaaes.hyp" "$GUIDESDIR"
+	cp "$SRC/doc/xaaes/xaaes.ref" "$GUIDESDIR"
 }
 
 create_filesystem() {
