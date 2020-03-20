@@ -27,9 +27,30 @@ sleep 15s
 for f in .travis/*.zip
 do
 	curl \
-    --request PUT \
-    --user ${BINTRAY_USER}:${BINTRAY_API_KEY} \
-    --header "Content-Type: application/json" \
-    --data "{ \"list_in_downloads\": true }" \
-    "${API}/file_metadata/${SUBJECT}/${REPO}/${PACKAGE_NAME}/${LONG_VERSION}/$(basename $f)"
+		--silent \
+		--request PUT \
+		--user ${BINTRAY_USER}:${BINTRAY_API_KEY} \
+		--header "Content-Type: application/json" \
+		--data "{ \"list_in_downloads\": true }" \
+		"${API}/file_metadata/${SUBJECT}/${REPO}/${PACKAGE_NAME}/${LONG_VERSION}/$(basename $f)"
 done
+
+# number of versions & the last (oldest) one
+read -d "\n" num_versions last_version \
+	<<< $(curl \
+		--silent \
+		--request GET \
+		--user ${BINTRAY_USER}:${BINTRAY_API_KEY} \
+		"${API}/packages/${SUBJECT}/${REPO}/${PACKAGE_NAME}" | jq -r '(.versions | length), .versions[-1]') \
+		|| ([ "$num_versions" ] && [ "$last_version" ])
+
+# check if more than 10 versions
+if [ "$num_versions" -gt "10" ]
+then
+	# delete the last version
+	curl \
+		--silent \
+		--request DELETE \
+		--user ${BINTRAY_USER}:${BINTRAY_API_KEY} \
+		"${API}/packages/${SUBJECT}/${REPO}/${PACKAGE_NAME}/versions/$last_version"
+fi
