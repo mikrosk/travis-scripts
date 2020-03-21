@@ -12,7 +12,12 @@ INSTALL_ROOT=$(dirname ${INSTALL_DIR})
 mkdir -p "${DEPLOY_DIR}"
 
 cd "${INSTALL_ROOT}"
-zip -r -9 "${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}-${CPU_TARGET}.zip" "${ARCHIVE_FOLDER}"
+if [ -n "${CPU_TARGET+x}" ]
+then
+	zip -r -9 "${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}-${CPU_TARGET}.zip" "${ARCHIVE_FOLDER}"
+else
+	zip -r -9 "${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}.zip" "${ARCHIVE_FOLDER}"
+fi
 cd -
 
 sed -i -e "s/PACKAGE_NAME/${PROJECT_NAME}/g;" .travis/bintray.desc
