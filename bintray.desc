@@ -1,0 +1,19 @@
+{
+    "package": {
+        "name": "PACKAGE_NAME",
+        "repo": "freemint",
+        "subject": "freemint"
+    },
+
+    "version": {
+        "name": "PACKAGE_VERSION",
+        "desc": "Commit URL: COMMIT_URL",
+        "attributes": [{"name": "Commit", "values" : ["COMMIT_ID"], "type": "string"}]
+    },
+
+    "files": [
+        {"includePattern": "DEPLOY_DIR/(.*\\.zip)", "uploadPattern": "PACKAGE_NAME/PACKAGE_VERSION/$1", "matrixParams": {"override": 1}}
+    ],
+
+    "publish": true
+}
