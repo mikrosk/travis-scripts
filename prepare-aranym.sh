@@ -7,11 +7,6 @@ SRC="$1"
 DST="$2"
 VER="$3"
 ARANYM_DIR="$4"
-TERADESK_DIR="$5"
-BASH_DIR="$6"
-COREUTILS_DIR="$7"
-QED_DIR="$8"
-DOSFSTOOLS_DIR="$9"
 
 HERE="$(dirname "$0")"
 . "$HERE/util.sh"
@@ -73,4 +68,4 @@ mkdir -p "$ROOT"
 cp -r "$ARANYM_DIR/fvdi"/* "$ROOT"
 sed -e "/^#exec u:\/c\/mint\/gluestik.prg/a#echo\n\nexec u:\/c\/fvdi\/fvdi.prg" "$MINTDIR/mint.cnf" > "$MINTDIR/mint.cnf.tmp" && mv "$MINTDIR/mint.cnf.tmp" "$MINTDIR/mint.cnf"
 
-create_filesystem
+create_filesystem "$GUIDESDIR"

@@ -400,10 +400,6 @@ copy_sysroot() {
 	local TARGET="$2"
 	mkdir -p "$SYSROOT/opt/GEM"
 
-	#mkdir -p "$SYSROOT/opt/GEM/cops"
-	#cp "$SRC/tools/cops/.compile_$TARGET/cops.app" "$SYSROOT/opt/GEM/cops"
-	#cp "$SRC/tools/cops/copsicn.rsc" "$SYSROOT/opt/GEM/cops"
-
 	mkdir -p "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/.compile_$TARGET/fsetter.app" "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/COPYING" "$SYSROOT/opt/GEM/fsetter"
@@ -425,18 +421,6 @@ copy_sysroot() {
 	cp "$SRC/tools/gluestik/LIESMICH" "$SYSROOT/opt/GEM/gluestik"
 	cp "$SRC/tools/gluestik/README" "$SYSROOT/opt/GEM/gluestik"
 
-	#mkdir -p "$SYSROOT/opt/GEM/hyp_view"
-	#cp "$SRC/tools/hypview/.compile_$TARGET/hyp_view.app" "$SYSROOT/opt/GEM/hyp_view"
-	#cp -r "$SRC/tools/hypview/doc" "$SYSROOT/opt/GEM/hyp_view"
-	#mkdir -p "$SYSROOT/opt/GEM/hyp_view/de"
-	#cp -r "$SRC/tools/hypview/hyp_view/de.rsc" "$SYSROOT/opt/GEM/hyp_view/de/hyp_view.rsc"
-	#mkdir -p "$SYSROOT/opt/GEM/hyp_view/cs"
-	#cp -r "$SRC/tools/hypview/hyp_view/cs.rsc" "$SYSROOT/opt/GEM/hyp_view/cs/hyp_view.rsc"
-	#cp "$SRC/tools/hypview/release"/* "$SYSROOT/opt/GEM/hyp_view"
-	#cp -r "$SRC/tools/hypview/skins" "$SYSROOT/opt/GEM/hyp_view"
-	#cp "$SRC/tools/hypview/hyp_view.bgh" "$SYSROOT/opt/GEM/hyp_view"
-	#cp "$SRC/tools/hypview/hyp_view/en.rsc" "$SYSROOT/opt/GEM/hyp_view/hyp_view.rsc"
-
 	mkdir -p "$SYSROOT/opt/GEM/mgw"
 	cp "$SRC/tools/mgw/.compile_$TARGET/mgw.prg" "$SYSROOT/opt/GEM/mgw"
 	cp -r "$SRC/tools/mgw/examples" "$SYSROOT/opt/GEM/mgw"
@@ -448,22 +432,6 @@ copy_sysroot() {
 	cp "$SRC/tools/nohog2/.compile_$TARGET/nohog2.acc" "$SYSROOT/opt/GEM/nohog2"
 	cp "$SRC/tools/nohog2/COPYING" "$SYSROOT/opt/GEM/nohog2"
 	cp "$SRC/tools/nohog2/README" "$SYSROOT/opt/GEM/nohog2"
-
-	#mkdir -p "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/.compile_$TARGET/toswin2.app" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/tw-call/.compile_$TARGET/tw-call.app" "$SYSROOT/opt/GEM/toswin2"
-	#cp -r "$SRC/tools/toswin2/doc" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/english/toswin2.rsc" "$SYSROOT/opt/GEM/toswin2"
-	#cp -r "$SRC/tools/toswin2/screenshots" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/BUGS" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/FAQ" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/NEWS" "$SYSROOT/opt/GEM/toswin2"
-	#mkdir -p "$SYSROOT/opt/GEM/toswin2/de"
-	#cp "$SRC/tools/toswin2/toswin2.rsc" "$SYSROOT/opt/GEM/toswin2/de"
-	#cp "$SRC/tools/toswin2/allcolors.sh" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/twterm.src" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/README.terminfo" "$SYSROOT/opt/GEM/toswin2"
-	#cp "$SRC/tools/toswin2/vttest.txt" "$SYSROOT/opt/GEM/toswin2"
 
 	mkdir -p "$SYSROOT/bin"
 	cp "$SRC/tools/crypto/.compile_$TARGET/crypto" "$SYSROOT/bin/crypto"
@@ -564,22 +532,17 @@ create_filesystem() {
 	touch "$SYSROOT/var/run/utmp"
 
 	cp -r "$TERADESK_DIR" "$SYSROOT/opt/GEM"
-	
-	if [ "$CPU_TARGET" = "000" ]
-	then
-		rm "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qed02060.app" "$QED_DIR/qedcol.app"
-		mv "$QED_DIR/qed000.app" "$QED_DIR/qed.app"
-	elif [ "$CPU_TARGET" = "col" ]
-	then
-		rm "$QED_DIR/qed000.app" "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qed02060.app"
-		mv "$QED_DIR/qedcol.app" "$QED_DIR/qed.app"
-	else
-		# 02060, 030, 040, 060
-		rm "$QED_DIR/qed000.app" "$QED_DIR/qed030.app" "$QED_DIR/qed040.app" "$QED_DIR/qed060.app" "$QED_DIR/qedcol.app"
-		mv "$QED_DIR/qed02060.app" "$QED_DIR/qed.app"
-	fi
 	cp -r "$QED_DIR" "$SYSROOT/opt/GEM"
+	cp -r "$COPS_DIR" "$SYSROOT/opt/GEM"
+	cp -r "$HYPVIEW_DIR" "$SYSROOT/opt/GEM"
+	cp -r "$TOSWIN2_DIR" "$SYSROOT/opt/GEM"
 	
+	# can't go to copy_guides because that is called for all builds
+	local GUIDESDIR="$1"
+	mkdir -p "$GUIDESDIR"
+	cp "$QED_DIR/doc"/qed.{hyp,ref} "$GUIDESDIR"
+	cp "$TOSWIN2_DIR/doc"/toswin2.{hyp,ref} "$GUIDESDIR"
+
 	cp "$DOSFSTOOLS_DIR/sbin/fsck.fat" "$SYSROOT/bin"
 	cp "$DOSFSTOOLS_DIR/sbin/fatlabel" "$SYSROOT/bin"
 }
