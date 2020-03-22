@@ -6,18 +6,31 @@
 HERE=$(dirname "$0")
 . "$HERE/commit.sh"
 
-ARCHIVE_FOLDER=$(basename ${INSTALL_DIR})
-INSTALL_ROOT=$(dirname ${INSTALL_DIR})
+if [ -z "${DEPLOY_ARCHIVE+x}" ]
+then
+	# zip is default
+	DEPLOY_ARCHIVE="zip"
+fi
+
+if [ -n "${CPU_TARGET+x}" ]
+then
+	ARCHIVE_PATH="${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}-${CPU_TARGET}.${DEPLOY_ARCHIVE}"
+else
+	ARCHIVE_PATH="${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}.${DEPLOY_ARCHIVE}"
+fi
 
 mkdir -p "${DEPLOY_DIR}"
 
-cd "${INSTALL_ROOT}"
-if [ -n "${CPU_TARGET+x}" ]
+if [ "${DEPLOY_ARCHIVE}" = "tar.bz2" ]
 then
-	zip -r -9 "${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}-${CPU_TARGET}.zip" "${ARCHIVE_FOLDER}"
+	cd ${INSTALL_DIR} && tar cjf ${ARCHIVE_PATH} *
+elif [ "${DEPLOY_ARCHIVE}" = "tar.gz" ]
+then
+	cd ${INSTALL_DIR} && tar czf ${ARCHIVE_PATH} *
 else
-	zip -r -9 "${DEPLOY_DIR}/${PROJECT_NAME}-${PROJECT_VERSION}-${SHORT_ID}.zip" "${ARCHIVE_FOLDER}"
+	cd $(dirname ${INSTALL_DIR}) && zip -r -9 ${ARCHIVE_PATH} $(basename ${INSTALL_DIR})
 fi
+
 cd -
 
 sed -i -e "s/PACKAGE_NAME/${PROJECT_NAME}/g;" .travis/bintray.desc

@@ -12,7 +12,7 @@
     },
 
     "files": [
-        {"includePattern": "DEPLOY_DIR/(.*\\.zip)", "uploadPattern": "PACKAGE_NAME/PACKAGE_VERSION/$1", "matrixParams": {"override": 1}}
+        {"includePattern": "DEPLOY_DIR/(.*)", "uploadPattern": "PACKAGE_NAME/PACKAGE_VERSION/$1", "matrixParams": {"override": 1}}
     ],
 
     "publish": true

@@ -16,7 +16,7 @@ PACKAGE_VERSION=${PROJECT_VERSION}-${LONG_ID}
 # why do we need this, no clue...
 sleep 15s
 
-for f in ${DEPLOY_DIR}/*.zip
+for f in ${DEPLOY_DIR}/*
 do
 	curl \
 		--silent \
