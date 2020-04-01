@@ -296,8 +296,8 @@ copy_xaaes() {
 	if [ "$BOOTABLE" = "yes" ]
 	then
 	cp "$SRC/xaaes/src.km/example.cnf" "$XAAESDIR/xaaes.cnf"
-	sed -e "s/^setenv TOSRUN		u:\\\\usr\\\\gem\\\\toswin2\\\\tw-call.app/setenv TOSRUN		u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\tw-call.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
-	sed -e "s/^run c:\\\\tools\\\\toswin2.app/run u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\toswin2.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^setenv TOSRUN		u:\\\\c\\\\mint\\\\1-19-cur\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\tw-call.app/setenv TOSRUN		u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\tw-call.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^run u:\\\\c\\\\mint\\\\1-19-cur\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\toswin2.app/run u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\toswin2\\\\toswin2.app/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	sed -e "s/^#setenv AVSERVER   \"DESKTOP \"/setenv AVSERVER   \"DESKTOP \"/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	sed -e "s/^#setenv FONTSELECT \"DESKTOP \"/setenv FONTSELECT \"DESKTOP \"/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	if [ "$TARGET" = "col" ]
