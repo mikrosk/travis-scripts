@@ -50,7 +50,7 @@ copy_sysroot "$SYSROOT" "040"
 copy_guides "$GUIDESDIR"
 
 mkdir -p "$SYSROOT/bin"
-cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
+cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin"
 
 ############
 # filesystem

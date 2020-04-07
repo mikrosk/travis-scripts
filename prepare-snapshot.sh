@@ -120,7 +120,7 @@ copy_guides "$GUIDESDIR"
 mkdir -p "$SYSROOT/bin"
 if [ "$CPU_TARGET" != "col" ]
 then
-	cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl.ttp"
+	cp "$SRC/sys/xdd/audio/actrl" "$SYSROOT/bin/actrl"
 fi
 
 if [ -n "${VERSIONED+x}" ]
