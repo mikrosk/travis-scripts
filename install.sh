@@ -38,6 +38,20 @@ do
 done
 cd -
 
+sudo mkdir -p "/usr/m68k-atari-mint"
+cd "/usr/m68k-atari-mint"
+for package in mintlib fdlibm gemlib cflib gemma
+do
+	unset PACKAGE_VERSION
+	unset PACKAGE_PATH
+	PACKAGE_VERSION=$(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package" | jq -r '.latest_version')
+	read PACKAGE_PATH \
+		<<< $(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package/versions/$PACKAGE_VERSION/files" \
+			| jq -r '.[].path')
+	wget -q -O - "https://dl.bintray.com/freemint/freemint/$PACKAGE_PATH" | sudo tar xjf -
+done
+cd -
+
 if [ "$CPU_TARGET" = "000" ]
 then
 	DOSFSTOOLS_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/dosfstools/releases/latest | jq -r '.assets[].browser_download_url' | grep 'm68000')
