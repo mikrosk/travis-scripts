@@ -44,8 +44,8 @@ read -d "\n" num_versions last_version \
 		"${API}/packages/${SUBJECT}/${REPO}/${PACKAGE_NAME}" | jq -r '(.versions | length), .versions[-1]') \
 		|| ([ "$num_versions" ] && [ "$last_version" ])
 
-# check if more than 10 versions
-if [ "$num_versions" -gt "10" ]
+# check if more than 20 versions
+if [ "$num_versions" -gt "20" ]
 then
 	# delete the last version
 	curl \
