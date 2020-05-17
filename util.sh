@@ -50,6 +50,7 @@ copy_modules() {
 	local TARGET="$2"
 	mkdir -p "$MINTDIR"
 	mkdir -p "$MINTDIR/doc"
+	
 	cp "$SRC/sys/sockets/.compile_$TARGET/inet4.xdd" "$MINTDIR"
 	mkdir -p "$MINTDIR/doc/inet4"
 	cp "$SRC/sys/sockets/inet4/BUGS" "$MINTDIR/doc/inet4"
@@ -58,15 +59,24 @@ copy_modules() {
 	cp "$SRC/sys/sockets/README.1ST" "$MINTDIR/doc/inet4"
 	cp "$SRC/sys/sockets/README.masquerade" "$MINTDIR/doc/inet4/README.mas"
 	cp "$SRC/sys/sockets/README.masquerade.TL" "$MINTDIR/doc/inet4/README.mtl"
+	
 	cp "$SRC/sys/xdd/lp/.compile_$TARGET/lp.xdd" "$MINTDIR"
+	
 	cp "$SRC/sys/xdd/xconout2/.compile_$TARGET/xconout2.xdd" "$MINTDIR"
 	cp "$SRC/sys/xdd/xconout2/README" "$MINTDIR/doc/xconout2.txt"
+	
 	cp "$SRC/sys/xfs/ext2fs/.compile_$TARGET/ext2.xfs" "$MINTDIR"
 	cp "$SRC/sys/xfs/ext2fs/Readme" "$MINTDIR/doc/ext2fs.txt"
+	
 	cp "$SRC/sys/xfs/minixfs/.compile_$TARGET/minix.xfs" "$MINTDIR/minix.xfx"
-	cp "$SRC/sys/xfs/minixfs/README" "$MINTDIR/doc/minix.txt"
+	mkdir -p "$MINTDIR/doc/minixfs"
+	cp "$SRC/sys/xfs/minixfs/COPYING" "$MINTDIR/doc/minixfs"
+	cp "$SRC/sys/xfs/minixfs/README" "$MINTDIR/doc/minixfs"
+	
 	cp "$SRC/sys/xfs/nfs/.compile_$TARGET/nfs.xfs" "$MINTDIR"
-	cp "$SRC/sys/xfs/nfs/README" "$MINTDIR/doc/nfs.txt"
+	mkdir -p "$MINTDIR/doc/nfs"
+	cp "$SRC/sys/xfs/nfs/COPYING" "$MINTDIR/doc/nfs"
+	cp "$SRC/sys/xfs/nfs/README" "$MINTDIR/doc/nfs"
 }
 
 # modules compatible with all m68k machines (except the FireBee...)
