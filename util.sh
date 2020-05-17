@@ -402,7 +402,6 @@ copy_sysroot() {
 
 	mkdir -p "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/.compile_$TARGET/fsetter.app" "$SYSROOT/opt/GEM/fsetter"
-	cp "$SRC/tools/fsetter/COPYING" "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/liesmich" "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/readme" "$SYSROOT/opt/GEM/fsetter"
 	cp "$SRC/tools/fsetter/history.txt" "$SYSROOT/opt/GEM/fsetter"
@@ -411,26 +410,22 @@ copy_sysroot() {
 	cp "$SRC/tools/fsetter/fsetter.rsc" "$SYSROOT/opt/GEM/fsetter/de/fsetter.rsc"
 
 	mkdir -p "$SYSROOT/opt/GEM/gemkfat"
-	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/opt/GEM/gemkfat"
 	cp "$SRC/tools/mkfatfs/.compile_$TARGET/gemkfatfs.app" "$SYSROOT/opt/GEM/gemkfat/gemkfatfs.app"
 	cp "$SRC/tools/mkfatfs/gemkfatfs.rsc" "$SYSROOT/opt/GEM/gemkfat/gemkfatfs.rsc"
 
 	mkdir -p "$SYSROOT/opt/GEM/gluestik"
 	cp "$SRC/tools/gluestik/.compile_$TARGET/gluestik.prg" "$SYSROOT/opt/GEM/gluestik"
-	cp "$SRC/tools/gluestik/COPYING" "$SYSROOT/opt/GEM/gluestik"
 	cp "$SRC/tools/gluestik/LIESMICH" "$SYSROOT/opt/GEM/gluestik"
 	cp "$SRC/tools/gluestik/README" "$SYSROOT/opt/GEM/gluestik"
 
 	mkdir -p "$SYSROOT/opt/GEM/mgw"
 	cp "$SRC/tools/mgw/.compile_$TARGET/mgw.prg" "$SYSROOT/opt/GEM/mgw"
 	cp -r "$SRC/tools/mgw/examples" "$SYSROOT/opt/GEM/mgw"
-	cp "$SRC/tools/mgw/COPYING" "$SYSROOT/opt/GEM/mgw"
 	cp "$SRC/tools/mgw/LIESMICH" "$SYSROOT/opt/GEM/mgw"
 	cp "$SRC/tools/mgw/README" "$SYSROOT/opt/GEM/mgw"
 
 	mkdir -p "$SYSROOT/opt/GEM/nohog2"
 	cp "$SRC/tools/nohog2/.compile_$TARGET/nohog2.acc" "$SYSROOT/opt/GEM/nohog2"
-	cp "$SRC/tools/nohog2/COPYING" "$SYSROOT/opt/GEM/nohog2"
 	cp "$SRC/tools/nohog2/README" "$SYSROOT/opt/GEM/nohog2"
 
 	mkdir -p "$SYSROOT/bin"
@@ -467,19 +462,16 @@ copy_sysroot() {
 
 	mkdir -p "$SYSROOT/share/man/man1"
 	cp "$SRC/tools/lpflush/lpflush.1" "$SYSROOT/share/man/man1/lpflush"
-	mkdir -p "$SYSROOT/share/doc/lpflush"
-	cp "$SRC/tools/lpflush/COPYING" "$SYSROOT/share/doc/lpflush"
+	#mkdir -p "$SYSROOT/share/doc/lpflush"
 
 	mkdir -p "$SYSROOT/share/doc/minix-tools"
 	cp "$SRC/tools/minix/COPYING" "$SYSROOT/share/doc/minix-tools"
 	cp "$SRC/tools/minix/docs"/*.doc "$SYSROOT/share/doc/minix-tools"
 
 	mkdir -p "$SYSROOT/share/doc/mkfatfs"
-	cp "$SRC/tools/mkfatfs/COPYING" "$SYSROOT/share/doc/mkfatfs"
 	cp "$SRC/tools/mkfatfs/README" "$SYSROOT/share/doc/mkfatfs"
 
-	mkdir -p "$SYSROOT/share/doc/mktbl"
-	cp "$SRC/tools/mktbl/COPYING" "$SYSROOT/share/doc/mktbl"
+	#mkdir -p "$SYSROOT/share/doc/mktbl"
 
 	mkdir -p "$SYSROOT/share/man/man8"
 	cp "$SRC/tools/net-tools/ifconfig.8" "$SYSROOT/share/man/man8/ifconfig"
