@@ -33,9 +33,9 @@ copy_aranym_modules "$MINTDIR"
 copy_xaloader "$XAAESDIR" "040"
 if [ -n "${VERSIONED+x}" ]
 then
-	copy_xaaes "$XAAESDIR" "040" "yes"
+	copy_xaaes "$XAAESDIR" "040" "yes" "yes"
 else
-	copy_xaaes "$XAAESDIR" "040" "no"
+	copy_xaaes "$XAAESDIR" "040" "no" "yes"
 fi
 
 copy_usbloader "$USBDIR" "040"

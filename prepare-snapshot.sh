@@ -78,9 +78,9 @@ fi
 copy_xaloader "$XAAESDIR" "$CPU_TARGET"
 if [ -n "${VERSIONED+x}" ]
 then
-	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "yes"
+	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "yes" "no"
 else
-	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "no"
+	copy_xaaes "$XAAESDIR" "$CPU_TARGET" "no" "no"
 fi
 
 copy_usbloader "$USBDIR" "$CPU_TARGET"

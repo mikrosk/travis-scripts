@@ -282,6 +282,7 @@ copy_xaaes() {
 	local XAAESDIR="$1"
 	local TARGET="$2"
 	local BOOTABLE="$3"
+	local ARANYM="$4"
 	mkdir -p "$XAAESDIR"
 	if [ "$TARGET" = "col" ]
 	then
@@ -312,11 +313,13 @@ copy_xaaes() {
 	sed -e "s/^#setenv FONTSELECT \"DESKTOP \"/setenv FONTSELECT \"DESKTOP \"/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	if [ "$TARGET" = "col" ]
 	then
-	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\teradesk\\\\desk_cf.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" &&
-	mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\teradesk\\\\desk_cf.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	else
-	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\teradesk\\\\desktop.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" &&
-	mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	sed -e "s/^#shell = c:\\\\teradesk\\\\desktop.prg/shell = u:\\\\c\\\\mint\\\\$VER\\\\sys-root\\\\opt\\\\GEM\\\\teradesk\\\\desktop.prg/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
+	fi
+	if [ "$ARANYM" = "yes" ]
+	then
+	sed -e "s/^clipboard = c:\\\\clipbrd\\\\/clipboard = u:\\\\host\\\\clipbrd\\\\/;" "$XAAESDIR/xaaes.cnf" > "$XAAESDIR/xaaes.cnf.tmp" && mv "$XAAESDIR/xaaes.cnf.tmp" "$XAAESDIR/xaaes.cnf"
 	fi
 	fi
 	cp "$SRC/xaaes/src.km"/xa_help.* "$XAAESDIR"
