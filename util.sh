@@ -378,6 +378,7 @@ copy_usb4tos() {
 	local USB4TOSDIR="$1"
 	mkdir -p "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/.compile_prg/usb.prg" "$USB4TOSDIR"
+	cp "$SRC/sys/usb/src.km/ucd/aranym/.compile_prg/aranym.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/unicorn/.compile_prg/unicorn.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg/netusbee.prg" "$USB4TOSDIR"
 	cp "$SRC/sys/usb/src.km/ucd/netusbee/.compile_prg_000/netusbee.prg" "$USB4TOSDIR/netus000.prg"
