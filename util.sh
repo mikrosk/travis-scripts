@@ -371,7 +371,7 @@ copy_ct60_usb_modules() {
 copy_aranym_usb_modules() {
 	local USBDIR="$1"
 	mkdir -p "$USBDIR"
-	cp "$SRC/sys/usb/src.km/ucd/aranym/aranym.ucd" "$USBDIR"
+	cp "$SRC/sys/usb/src.km/ucd/aranym/.compile_040/aranym.ucd" "$USBDIR"
 }
 
 copy_usb4tos() {
