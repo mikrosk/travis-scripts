@@ -16,6 +16,9 @@ fi
 if [ "$CPU_TARGET" = "ara" ]
 then
 	CPU_TARGET="040"
+elif [ "$CPU_TARGET" = "prg" ]
+then
+	CPU_TARGET="000"
 fi
 
 LIBCMINI_URL=$(curl -s -H "$CURL_HEADER" https://api.github.com/repos/freemint/libcmini/releases/latest | jq -r '.assets[].browser_download_url')
