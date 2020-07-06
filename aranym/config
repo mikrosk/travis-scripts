@@ -19,16 +19,6 @@ Debugger = No
 WheelEiffel = No
 AltGr = Yes
 
-[HOTKEYS]
-Setup = Pause
-Quit = LS+Pause
-Reboot = LC+Pause
-ColdReboot = LS+LC+Pause
-Ungrab = LS+LC+LA+Escape
-Debug = LA+Pause
-Screenshot = PrintScreen
-Fullscreen = ScrollLock
-
 [JIT]
 JIT = Yes
 JITFPU = Yes
