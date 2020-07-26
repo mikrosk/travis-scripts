@@ -1,7 +1,7 @@
 {
     "package": {
         "name": "PACKAGE_NAME",
-        "repo": "freemint",
+        "repo": "REPO_NAME",
         "subject": "freemint"
     },
 

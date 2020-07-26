@@ -8,7 +8,7 @@ HERE=$(dirname "$0")
 
 API="https://api.bintray.com"
 SUBJECT="freemint"
-REPO="freemint"
+REPO=${BINTRAY_REPO:-"freemint"}
 # must match with before_deploy.sh
 PACKAGE_NAME=${PROJECT_NAME}
 PACKAGE_VERSION=${PROJECT_VERSION}-${LONG_ID}
