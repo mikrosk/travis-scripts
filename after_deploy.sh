@@ -11,7 +11,7 @@ SUBJECT="freemint"
 REPO=${BINTRAY_REPO:-"freemint"}
 # must match with before_deploy.sh
 PACKAGE_NAME=${PROJECT_NAME}
-PACKAGE_VERSION=${PROJECT_VERSION}-${LONG_ID}
+PACKAGE_VERSION=${BINTRAY_VERSION:-${PROJECT_VERSION}}-${LONG_ID}
 
 # why do we need this, no clue...
 sleep 15s
