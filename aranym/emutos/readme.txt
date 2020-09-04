@@ -26,6 +26,7 @@ gr - Greek
 it - Italian
 nl - Dutch
 no - Norwegian
+pl - Polish
 ru - Russian
 se - Swedish
 cd - Swiss German
@@ -61,7 +62,7 @@ Vincent Rivière's GCC 4.6.4 cross-compiler.  The custom tools used in
 the build process were built with native GCC 4.8.4.
 
 The source package and other binary packages are available at:
-https://sourceforge.net/projects/emutos/files/emutos/0.9.12/
+https://sourceforge.net/projects/emutos/files/emutos/1.0/
 
 The extras directory (if provided) contains:
 (1) one or more alternate desktop icon sets, which you can use to replace
@@ -114,4 +115,4 @@ doc/vdibind.txt       - Old information on VDI bindings
 
 -- 
 The EmuTOS development team
-http://emutos.sourceforge.net/
+https://emutos.sourceforge.io/
