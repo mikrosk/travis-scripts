@@ -4,7 +4,7 @@
 # -x: Display expanded script commands
 
 CURL_USER="${BINTRAY_USER}:${BINTRAY_API_KEY}"
-SYSROOT_DIR="/usr/m68k-atari-mint"
+SYSROOT_DIR=${SYSROOT_DIR:-"/usr/m68k-atari-mint"}
 
 sudo mkdir -p "${SYSROOT_DIR}" && cd "${SYSROOT_DIR}"
 
