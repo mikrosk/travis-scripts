@@ -5,6 +5,8 @@
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_REPO_SLUG}" = "freemint/freemint" ]
 then
+	BINTRAY_REPO="travis" SYSROOT_DIR="/" ./.travis/install_bintray.sh m68k-atari-mint-binutils-gdb m68k-atari-mint-gcc mintbin
+
 	CURL_HEADER="Authorization: token $GITHUB_OATH_TOKEN"
 	CURL_USER="${BINTRAY_USER}:${BINTRAY_API_KEY}"
 
@@ -28,27 +30,15 @@ then
 	do
 		unset PACKAGE_VERSION
 		unset PACKAGE_PATH
-		PACKAGE_VERSION=$(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package" | jq -r '.latest_version')
+		PACKAGE_VERSION=$(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/app/$package" | jq -r '.latest_version')
 		read PACKAGE_PATH \
-			<<< $(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package/versions/$PACKAGE_VERSION/files" \
+			<<< $(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/app/$package/versions/$PACKAGE_VERSION/files" \
 				| jq -r '.[] | select(.name | endswith("-" + env.CPU_TARGET + ".zip")) | .path')
-		wget -q -O temp.zip "https://dl.bintray.com/freemint/freemint/$PACKAGE_PATH" && unzip -q temp.zip && rm temp.zip
+		wget -q -O temp.zip "https://dl.bintray.com/freemint/app/$PACKAGE_PATH" && unzip -q temp.zip && rm temp.zip
 	done
 	cd -
-
-	sudo mkdir -p "/usr/m68k-atari-mint"
-	cd "/usr/m68k-atari-mint"
-	for package in mintlib fdlibm gemlib cflib gemma
-	do
-		unset PACKAGE_VERSION
-		unset PACKAGE_PATH
-		PACKAGE_VERSION=$(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package" | jq -r '.latest_version')
-		read PACKAGE_PATH \
-			<<< $(curl -s -u "${CURL_USER}" -X GET "https://api.bintray.com/packages/freemint/freemint/$package/versions/$PACKAGE_VERSION/files" \
-				| jq -r '.[].path')
-		wget -q -O - "https://dl.bintray.com/freemint/freemint/$PACKAGE_PATH" | sudo tar xjf -
-	done
-	cd -
+	
+	BINTRAY_REPO="lib" ./.travis/install_bintray.sh mintlib fdlibm gemlib cflib gemma
 
 	if [ "$CPU_TARGET" = "000" ]
 	then
@@ -66,7 +56,9 @@ then
 	wget -q -O - "$DOSFSTOOLS_URL" | tar xjf - -C dosfstools
 	cd -
 else
-	sudo apt-get install mintlib-m68k-atari-mint pml-m68k-atari-mint gemlib-m68k-atari-mint cflib-m68k-atari-mint gemma-m68k-atari-mint
+	sudo add-apt-repository -y ppa:vriviere/ppa
+	sudo apt-get update
+	sudo apt-get install binutils-m68k-atari-mint gcc-m68k-atari-mint mintbin-m68k-atari-mint mintlib-m68k-atari-mint pml-m68k-atari-mint gemlib-m68k-atari-mint cflib-m68k-atari-mint gemma-m68k-atari-mint
 fi
 
 # HCP is defined as "/tmp/hcp/bin/hcp"
