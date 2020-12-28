@@ -33,12 +33,12 @@ fi
 
 cd -
 
-sed -i -e "s/PACKAGE_NAME/${PROJECT_NAME}/g;" .travis/bintray.desc
-BINTRAY_REPO=${BINTRAY_REPO:-"freemint"}
-sed -i -e "s/REPO_NAME/${BINTRAY_REPO}/g;" .travis/bintray.desc
-BINTRAY_VERSION=${BINTRAY_VERSION:-${PROJECT_VERSION}}
-sed -i -e "s/PACKAGE_VERSION/${BINTRAY_VERSION}-${LONG_ID}/g;" .travis/bintray.desc
-sed -i -e "s/COMMIT_ID/${LONG_ID}/g;" .travis/bintray.desc
-sed -i -e "s/COMMIT_URL/https:\/\/github.com\/${PROJECT_REPO}\/${PROJECT_NAME}\/commit\/${LONG_ID}/g;" .travis/bintray.desc
+#sed -i -e "s/PACKAGE_NAME/${PROJECT_NAME}/g;" .travis/bintray.desc
+#BINTRAY_REPO=${BINTRAY_REPO:-"freemint"}
+#sed -i -e "s/REPO_NAME/${BINTRAY_REPO}/g;" .travis/bintray.desc
+#BINTRAY_VERSION=${BINTRAY_VERSION:-${PROJECT_VERSION}}
+#sed -i -e "s/PACKAGE_VERSION/${BINTRAY_VERSION}-${LONG_ID}/g;" .travis/bintray.desc
+#sed -i -e "s/COMMIT_ID/${LONG_ID}/g;" .travis/bintray.desc
+#sed -i -e "s/COMMIT_URL/https:\/\/github.com\/${PROJECT_REPO}\/${PROJECT_NAME}\/commit\/${LONG_ID}/g;" .travis/bintray.desc
 # ${DEPLOY_DIR} must not contain '#'
-sed -i -e "s#DEPLOY_DIR#${DEPLOY_DIR}#g;" .travis/bintray.desc
+#sed -i -e "s#DEPLOY_DIR#${DEPLOY_DIR}#g;" .travis/bintray.desc

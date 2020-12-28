@@ -1,4 +1,4 @@
 # use as: . commit.sh
 
-SHORT_ID=$(echo ${TRAVIS_COMMIT} | cut -c 1-3)
-LONG_ID=$(echo ${TRAVIS_COMMIT} | cut -c 1-8)
+SHORT_ID=$(echo ${GITHUB_SHA} | cut -c 1-3)
+LONG_ID=$(echo ${GITHUB_SHA} | cut -c 1-8)
